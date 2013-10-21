@@ -46,7 +46,7 @@ This program is distributed in the hope that it will be useful, but
 These installation instructions assume you have a UNIX-based operating
 system, such as Mac OS X or Linux. (If you have a Windows operating
 system, Guillaume Jacquenot has generously provided
-[instructions](Compile_LBFGSB_on_Windows.txt) for compiling the
+[instructions](INSTALL.WINDOWS.txt) for compiling the
 software on Windows with [gnumex](http://gnumex.sourceforge.net) and
 Mingw. These instructions also assume you have
 [GNU Make](http://www.gnu.org/software/make) installed.
