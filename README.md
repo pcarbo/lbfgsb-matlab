@@ -160,7 +160,7 @@ to crash. But there's only one way to find out: the hard way.
 I've written a short script [examplehs038.m](src/examplehs038.m) which
 demonstrates how to call **lbfgsb** for solving a very small
 optimization problem, the Hock & Schittkowski test problem #38 **(Note
-#3)**. The optimization problem has 4 variables. They are bounded from
+ #3)**. The optimization problem has 4 variables. They are bounded from
 below by -10 and from above by +10. We've set the starting point to
 (-3, -1, -3, -1). We've written two MATLAB functions for computing the
 objective function and the gradient of the objective function at a
