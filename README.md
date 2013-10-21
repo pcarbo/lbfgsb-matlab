@@ -50,13 +50,16 @@ software on Windows with [gnumex](http://gnumex.sourceforge.net) and
 Mingw. These instructions also assume you have GNU
 [make](http://www.gnu.org/software/make/) installed.
 
-**Download the source.** First, download and unpack the
-[tar archive](lbfgsb-for-matlab.tar.gz). **FIX THIS** It contains some
+1. **Download the source code.** Clone or fork the this repository, or
+download this repository as a
+[ZIP file](http://github.com/pcarbo/lbfgsb-matlab/archive/master.zip)
+and unpack the ZIP file. The [src](src) subdirectory contains some
 MATLAB files (ending in .m), some C++ source and header files (ending
-in .h and .cpp), a single Fortran 77 source file solver.f containing
-the L-BFGS-B routines, and a Makefile. I've included a version of the
-Fortran routines that is more recent than what is available for
-download at the
+in .h and .cpp), a single Fortran 77 source file,
+[solver.f](src/solver.f), containing the L-BFGS-B routines, and a
+[Makefile](src/Makefile). I've included a version of the Fortran
+routines that is more recent than what is available for download at
+the
 [distribution site](http://www.ece.northwestern.edu/~nocedal/lbfgsb.html)
 at Northwestern University.
 
