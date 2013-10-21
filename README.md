@@ -294,15 +294,15 @@ calling the function runSolver.
 
 ###Overview of source files
 
-<code>solver.f</code><br>
+    solver.f
 Fortran 77 source for the L-BFGS-B solver
 routines.
 
-<code>program.h<br>
-program.cpp</code><br>
+    program.h
+    program.cpp
 Header and source file for the C++ interface.
 
-<code>array.h<br>
+array.h<br>
 arrayofmatrices.h<br>
 matlabexception.h<br>
 matlabmatrix.h<br>
@@ -315,7 +315,7 @@ matlabmatrix.cpp<br>
 atlabprogram.cpp<br>
 matlabscalar.cpp<br>
 matlabstring.cpp<br>
-lbfgsb.cpp</code><br>
+lbfgsb.cpp<br>
 Header and source files for the MATLAB interface.
 
 <code>lbfgsb.m</code><br>
