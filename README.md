@@ -92,7 +92,7 @@ might be able to build and compile the MEX File from source code
 simply by calling MATLAB's mex program with the C++ and Fortran source
 files as inputs like so:
 
-`mex -output lbfgsb *.cpp solver.f`
+    mex -output lbfgsb *.cpp solver.f
 
 If that doesn't work (e.g. you get linking errors or it makes MATLAB
 crash when you try to call it) then you may have to follow the more
@@ -121,24 +121,24 @@ of trial and error until before you get it right.
 On my laptop running Mac OS X 10.3.9 with MATLAB 7.2, my settings
 for the Makefile are
 
-`MEX         = mex
- MEXSUFFIX   = mexmac
- MATLAB_HOME = /Applications/MATLAB72
- CXX         = g++
- F77         = g77 
- CFLAGS      = -O3 -fPIC -fno-common -fexceptions \
-               -no-cpp-precomp 
- FFLAGS      = -O3 -x f77-cpp-input -fPIC -fno-common`
+    MEX         = mex
+    MEXSUFFIX   = mexmac
+    MATLAB_HOME = /Applications/MATLAB72
+    CXX         = g++
+    F77         = g77 
+    CFLAGS      = -O3 -fPIC -fno-common -fexceptions \
+                  -no-cpp-precomp 
+    FFLAGS      = -O3 -x f77-cpp-input -fPIC -fno-common
 
 On my Linux machine, I set the variables in the Makefile like so:
 
-`MEX         = mex
- MEXSUFFIX   = mexglx
- MATLAB_HOME = /cs/local/generic/lib/pkg/matlab-7.2
- CXX         = g++-3.4.5
- F77         = g77-3.4.5
- CFLAGS      = -O3 -fPIC -pthread 
- FFLAGS      = -O3 -fPIC -fexceptions`
+    MEX         = mex
+    MEXSUFFIX   = mexglx
+    MATLAB_HOME = /cs/local/generic/lib/pkg/matlab-7.2
+    CXX         = g++-3.4.5
+    F77         = g77-3.4.5
+    CFLAGS      = -O3 -fPIC -pthread 
+    FFLAGS      = -O3 -fPIC -fexceptions
 
 It may be helpful to look at the GCC documentation in order to
 understand what these various compiler flags mean.
