@@ -8,13 +8,13 @@ the variables. One of the key features of the nonlinear solver is that
 knowledge of the Hessian is not required; the solver computes search
 directions by keeping track of a quadratic model of the objective
 function with a limited-memory BFGS (Broyden-Fletcher-Goldfarb-Shanno)
-approximation to the Hessian (1). The algorithm was developed by Ciyou
+approximation to the Hessian (Note #1). The algorithm was developed by Ciyou
 Zhu, Richard Byrd and Jorge Nocedal. For more information, go to the
 [original distribution site](http://www.ece.northwestern.edu/~nocedal/lbfgsb.html)
 for the L-BFGS-B software package.
 
 I've designed an interface to the L-BFGS-B solver so that it can be
-called like any other function in MATLAB (2). See the text below for
+called like any other function in MATLAB (Note #2). See the text below for
 more information on installing and calling this function in
 MATLAB. Along the way, I've also developed a C++ class that
 encapsulates all the "messy" details in executing the L-BFGS-B
@@ -158,7 +158,7 @@ to crash. But there's only one way to find out: the hard way.
 
 I've written a short script [examplehs038.m](src/examplehs038.m) which
 demonstrates how to call **lbfgsb** for solving a small optimization
-problem, the Hock & Schittkowski test problem #38 (3). The
+problem, the Hock & Schittkowski test problem #38 (Note #3). The
 optimization problem has four variables. They are bounded from below
 by -10 and bounded from above by +10. We've set the starting point to
 (-3, -1, -3, -1). We've written two MATLAB functions for computing the
@@ -196,7 +196,7 @@ problem is to compute an approximation to the posterior, since it is
 not possible to compute the posterior exactly. In this case, the
 optimization problem corresponds to minimizing the distance between
 the true posterior distribution and an approximate distribution. For
-more information, see the paper of Blei, Ng and Jordan, 2003 (4). In
+more information, see the paper of Blei, Ng and Jordan, 2003 (Note #4). In
 order to run this example, you will need to install the
 [lightspeed](http://research.microsoft.com/~minka/software/lightspeed)
 for MATLAB developed by Tom Minka at Microsoft Research.
@@ -207,7 +207,7 @@ more likely to appear in that topic. Note that the order of the pixels
 in the image is unimportant, since LDA is a &quot;bag of words&quot;
 model. In another figure we show a small sample of the data generated
 from the topics. Each image represents a document, and the pixels in
-the image depict the word proportions in that document (5).
+the image depict the word proportions in that document (Note #5).
 
 Next, the script runs the L-BFGS-B solver to find a local minimum to
 the variational objective. Buried in the M-file [mflda.m](src/mflda.m)
@@ -270,7 +270,7 @@ Developed by [Peter Carbonetto](http://www.cs.ubc.ca/spider/pcarbo)
 Dept. of Human Genetics
 University of Chicago
 
-###Footnotes
+###Notes
 
 1. Ciyou Zhu, Richard H. Byrd, Peihuang Lu and Jorge Nocedal
 (1997). Algorithm 778: L-BFGS-B: Fortran subroutines for large-scale
