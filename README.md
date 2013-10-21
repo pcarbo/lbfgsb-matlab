@@ -294,48 +294,48 @@ calling the function runSolver.
 
 ###Overview of source files
 
-solver.f<br>
+<b>solver.f</b><br>
 Fortran 77 source for the L-BFGS-B solver
 routines.
 
-program.h<br>
-program.cpp<br>
+<b>program.h<br>
+program.cpp<br></b>
 Header and source file for the C++ interface.
 
-array.h<br>
+<b>array.h<br>
 arrayofmatrices.h<br>
 matlabexception.h<br>
 matlabmatrix.h<br>
 matlabprogram.h<br>
-atlabscalar.h<br>
+matlabscalar.h<br>
 matlabstring.h<br>
 arrayofmatrices.cpp<br>
-atlabexception.cpp<br>
+matlabexception.cpp<br>
 matlabmatrix.cpp<br>
-atlabprogram.cpp<br>
+matlabprogram.cpp<br>
 matlabscalar.cpp<br>
 matlabstring.cpp<br>
-lbfgsb.cpp<br>
+lbfgsb.cpp<br></b>
 Header and source files for the MATLAB interface.
 
-lbfgsb.m<br>
+<b>lbfgsb.m</b><br>
 Usage instructions for the MEX file.
 
-examplehs038.m<br>
+<b>examplehs038.m</b><br>
 MATLAB script for solving the H&S test example #38.
 
-computeObjectiveHS038.m<br>
+<b>computeObjectiveHS038.m<br>
 computeGradientHS038.m<br>
-genericcallback.m<br>
-MATLAB functions used by the script **examplehs038.m**.
+genericcallback.m<br></b>
+MATLAB functions used by the script [examplehs038.m](src/examplehs038.m).
 
-exampleldaimages.m<br>
+<b>exampleldaimages.m</b><br>
 MATLAB script that generates synthetic documents and topics, then
 computes a mean field variational approximation to the posterior
 distribution of the latent Dirichlet allocation model, then displays
 the result.
 
-mflda.m<br>
+<b>mflda.m</b><br>
 This function computes a mean field variational approximation to the
 posterior distribution of the latent Dirichlet allocation model by
 minimizing the distance between the variational distribution and the
@@ -344,7 +344,7 @@ function subject to the bound constraints. The objective function also
 acts as a lower bound on the logarithm of the denominator that appears
 from the application of Bayes rule **(Note #4)**.
 
-callbackMFLDA.m<br>
+<b>callbackMFLDA.m<br>
 computeObjectiveMFLDA.m<br>
 computeGradientMFLDA.m<br>
 computelnZ.m<br>
@@ -353,8 +353,9 @@ computem.m<br>
 dirichletrnd.m<br>
 gammarnd.m<br>
 createsyntheticdata.m<br>
-mfldainit.m<br>
-Some functions used by **exampleldaimages.m** and **mflda.m**.
+mfldainit.m<br></b>
+Some functions used by [exampleldaimages.m](src/exampleldaimages.m) and
+[mflda.m](src/mflda.m).
 
 ###Credits
 
