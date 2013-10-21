@@ -1,6 +1,6 @@
 # A MATLAB interface for L-BFGS-B
 
-###Overview
+###Synopsis
 
 L-BFGS-B is a collection of Fortran 77 routines for solving
 large-scale nonlinear optimization problems with bound constraints on
@@ -263,6 +263,97 @@ point of the objective.) This particular problem demonstrates the
 limitations of limited-memory quasi-Newton approximations to the
 Hessian; the low storage requirements can come at the cost of slow
 convergence to the solution.
+
+###The C++ interface
+
+One of the nice byproducts of writing a MATLAB interface for
+L-BFGS-B is that I've ended up with a neat little C++ class that
+encapsulates the nuts and bolts of executing the solver. A brief
+description of the Program class can be found in the header file
+[program.h](src/program.h).
+
+"Program" is an abstract class, which means that its impossible to
+instantiate a Program object. This is because the class has member
+functions that aren't yet implemented. These are called pure virtual
+functions. In order to use the Program class, one needs to define
+another class that inherits the Program class and that implements the
+pure virtual functions. In fact, the class MatlabProgram (in
+[matlabprogram.h](src/matlabprogram.h)) is an example of such a class.
+
+The new child class must declare and implement these two
+functions:
+
+    virtual double computeObjective (int n, double* x);
+    virtual void computeGradient (int n, double* x, double* g);
+
+See the header file for a detailed description of these functions. The
+only remaining detail is calling the Program constructor. After that,
+it is just a matter of declaring a new object of type MyProgram then
+calling the function runSolver.
+
+###Overview of source files
+
+<code>solver.f</code><br>
+Fortran 77 source for the L-BFGS-B solver
+routines.
+
+<code>program.h<br>
+program.cpp</code><br>
+Header and source file for the C++ interface.
+
+<code>array.h<br>
+arrayofmatrices.h<br>
+matlabexception.h<br>
+matlabmatrix.h<br>
+matlabprogram.h<br>
+atlabscalar.h<br>
+matlabstring.h<br>
+arrayofmatrices.cpp<br>
+atlabexception.cpp<br>
+matlabmatrix.cpp<br>
+atlabprogram.cpp<br>
+matlabscalar.cpp<br>
+matlabstring.cpp<br>
+lbfgsb.cpp</code><br>
+Header and source files for the MATLAB interface.
+
+<code>lbfgsb.m</code><br>
+Usage instructions for the MEX file.
+
+<code>examplehs038.m</code><br>
+MATLAB script for solving the H&S test example #38.
+
+<code>computeObjectiveHS038.m<br>
+computeGradientHS038.m<br>
+genericcallback.m</code><br>
+MATLAB functions used by the script **examplehs038.m**.
+
+<code>exampleldaimages.m</code><br>
+MATLAB script that generates synthetic documents and topics, then
+computes a mean field variational approximation to the posterior
+distribution of the latent Dirichlet allocation model, then displays
+the result.
+
+<code>mflda.m</code><br>
+This function computes a mean field variational approximation to the
+posterior distribution of the latent Dirichlet allocation model by
+minimizing the distance between the variational distribution and the
+true distribution. It uses the L-BFGS-B to minimize the objective
+function subject to the bound constraints. The objective function also
+acts as a lower bound on the logarithm of the denominator that appears
+from the application of Bayes rule (Note #4).
+
+<code>callbackMFLDA.m<br>
+computeObjectiveMFLDA.m<br>
+computeGradientMFLDA.m<br>
+computelnZ.m<br>
+computelnZconst.m<br>
+computem.m<br>
+dirichletrnd.m<br>
+gammarnd.m<br>
+createsyntheticdata.m<br>
+mfldainit.m</code><br>
+Some functions used by **exampleldaimages.m** and **mflda.m**.
 
 ###Credits
 
