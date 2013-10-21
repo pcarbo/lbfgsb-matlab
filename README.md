@@ -13,6 +13,27 @@ Zhu, Richard Byrd and Jorge Nocedal. For more information, go to the
 [original distribution site](http://www.ece.northwestern.edu/~nocedal/lbfgsb.html)
 for the L-BFGS-B software package.
 
+I've designed an interface to the L-BFGS-B solver so that it can be
+called like any other function in MATLAB (2). See the text below for
+more information on installing and calling this function in
+MATLAB. Along the way, I've also developed a C++ class that
+encapsulates all the "messy" details in executing the L-BFGS-B
+code. See below for instructions on how to incorporate this C++ class
+info your own code.
+
+I've tested this software in MATLAB on both the Mac OS X and Linux
+operating systems.
+
+###License
+
+Information about license goes here.
+
+###Credits
+
+Developed by [Peter Carbonetto](http://www.cs.ubc.ca/spider/pcarbo)
+Dept. of Computer Science
+University of British Columbia
+
 ###Footnotes
 
 1. Ciyou Zhu, Richard H. Byrd, Peihuang Lu and Jorge Nocedal
