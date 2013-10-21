@@ -359,8 +359,9 @@ Some functions used by [exampleldaimages.m](src/exampleldaimages.m) and
 
 ###Credits
 
-Developed by [Peter Carbonetto](http://www.cs.ubc.ca/spider/pcarbo)
-Dept. of Human Genetics
+Developed by<br>
+[Peter Carbonetto](http://www.cs.ubc.ca/spider/pcarbo)<br>
+Dept. of Human Genetics<br>
 University of Chicago
 
 ###Notes
