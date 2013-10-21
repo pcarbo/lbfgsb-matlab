@@ -22,7 +22,8 @@ code. See below for instructions on how to incorporate this C++ class
 info your own code.
 
 I've tested this software in MATLAB on both the Mac OS X and Linux
-operating systems.
+operating systems (it has also been used successfully on Windows; see
+below).
 
 ###License
 
@@ -49,38 +50,37 @@ software on Windows with [gnumex](http://gnumex.sourceforge.net) and
 Mingw. These instructions also assume you have GNU
 [make](http://www.gnu.org/software/make/) installed.
 
-**Download the source.** First, download and unpack the <a
-href="lbfgsb-for-matlab.tar.gz">tar archive</a>. It contains some
+**Download the source.** First, download and unpack the
+[tar archive](lbfgsb-for-matlab.tar.gz). **FIX THIS** It contains some
 MATLAB files (ending in .m), some C++ source and header files (ending
 in .h and .cpp), a single Fortran 77 source file solver.f containing
 the L-BFGS-B routines, and a Makefile. I've included a version of the
 Fortran routines that is more recent than what is available for
-download at the <a
-href="http://www.ece.northwestern.edu/~nocedal/lbfgsb.html">distribution
-site</a> at Northwestern University.</p>
+download at the
+[distribution site](http://www.ece.northwestern.edu/~nocedal/lbfgsb.html)
+at Northwestern University.
 
-<p>What we will do is create a MEX file, which is basically a file
-that contains a routine that can be called from MATLAB as if it were a
-built-it function. To learn about MEX files, I refer you to <a
-href="http://www.mathworks.com/support/tech-notes/1600/1605.html">this
-document</a> at the MathWorks website.</p>
+What we will do is create a MEX file, which is basically a file that
+contains a routine that can be called from MATLAB as if it were a
+built-it function. To learn about MEX files, I refer you to
+[this document](http://www.mathworks.com/support/tech-notes/1600/1605.html)
+on the MathWorks website.
 
-<p><b>Install the C++ and Fortran 77 compilers.</b> In order to build
-the MEX file, you will need both a C++ compiler and a Fortran 77
+**Install the C++ and Fortran 77 compilers.** In order to build the
+MEX file, you will need both a C++ compiler and a Fortran 77
 compiler. Unfortunately, you can't just use any compiler. You have to
 use the precise one supported by MATLAB. For instance, if you are
 running Mac OS X 7.2 on a Linux operating system, you will need to
-install the <a href="http://www.gnu.org/software/gcc">GNU compiler
-collection</a> (GCC) version 3.4.4. Even if you already have a
-compiler installed on Linux, it may be the wrong version, and if you
-use the wrong version things could go horribly wrong! It is important
-that you use the correct version of the compiler, otherwise you will
-encounter linking errors. Refer to <a
-href="http://www.mathworks.com/support/tech-notes/1600/1601.html">this
-document</a> to find out which compiler is supported by your version
-of MATLAB.
+install [GNU compiler collection](http://www.gnu.org/software/gcc)
+(GCC) version 3.4.4. Even if you already have a compiler installed on
+Linux, it may be the wrong version, and if you use the wrong version
+things could go horribly wrong. It is important that you use the
+correct version of the compiler, otherwise you will encounter linking
+errors. Refer to
+[this document](http://www.mathworks.com/support/tech-notes/1600/1601.html)
+to find out which compiler is supported by your version of MATLAB.
 
-<p><b>Configure MATLAB.</b> Next, you need to set up and configure
+**Configure MATLAB.** Next, you need to set up and configure
 MATLAB to build MEX Files. This is explained quite nicely in <a
 href="http://www.mathworks.com/support/tech-notes/1600/1605.html">this
 MathWorks support document</a>.</p>
