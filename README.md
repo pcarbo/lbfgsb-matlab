@@ -259,11 +259,11 @@ they might not be in the same order).
 
 Don't be surprised if it takes many iterations before the optimization
 algorithm converges on a local minimum. (In repeated trials, I found
-it as many as two thousand iterations to converge to a stationary
-point of the objective.) This particular problem demonstrates the
-limitations of limited-memory quasi-Newton approximations to the
-Hessian; the low storage requirements can come at the cost of slow
-convergence to the solution.
+it as many as 2000 iterations to converge to a stationary point of the
+objective.) This particular problem demonstrates the limitations of
+limited-memory quasi-Newton approximations to the Hessian; the low
+storage requirements can come at the cost of slow convergence to the
+solution.
 
 ###The C++ interface
 
@@ -278,7 +278,7 @@ instantiate a Program object. This is because the class has member
 functions that aren't yet implemented. These are called pure virtual
 functions. In order to use the Program class, one needs to define
 another class that inherits the Program class and that implements the
-pure virtual functions. In fact, the class MatlabProgram (in
+pure virtual functions. The class MatlabProgram (in
 [matlabprogram.h](src/matlabprogram.h)) is an example of such a class.
 
 The new child class must declare and implement these two
