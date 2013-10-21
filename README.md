@@ -50,6 +50,12 @@ software on Windows with [gnumex](http://gnumex.sourceforge.net) and
 Mingw. These instructions also assume you have GNU
 [make](http://www.gnu.org/software/make/) installed.
 
+We will create a MEX file, which is basically a file that contains a
+routine that can be called from MATLAB as if it were a built-it
+function. To learn about MEX files, I refer you to
+[this document](http://www.mathworks.com/support/tech-notes/1600/1605.html)
+on the MathWorks website.
+
 1. **Download the source code.** Clone or fork the this repository, or
 download this repository as a
 [ZIP file](http://github.com/pcarbo/lbfgsb-matlab/archive/master.zip)
@@ -63,13 +69,7 @@ the
 [distribution site](http://www.ece.northwestern.edu/~nocedal/lbfgsb.html)
 at Northwestern University.
 
-What we will do is create a MEX file, which is basically a file that
-contains a routine that can be called from MATLAB as if it were a
-built-it function. To learn about MEX files, I refer you to
-[this document](http://www.mathworks.com/support/tech-notes/1600/1605.html)
-on the MathWorks website.
-
-**Install the C++ and Fortran 77 compilers.** In order to build the
+2. **Install the C++ and Fortran 77 compilers.** In order to build the
 MEX file, you will need both a C++ compiler and a Fortran 77
 compiler. Unfortunately, you can't just use any compiler. You have to
 use the precise one supported by MATLAB. For instance, if you are
@@ -83,79 +83,76 @@ errors. Refer to
 [this document](http://www.mathworks.com/support/tech-notes/1600/1601.html)
 to find out which compiler is supported by your version of MATLAB.
 
-**Configure MATLAB.** Next, you need to set up and configure
-MATLAB to build MEX Files. This is explained quite nicely in <a
-href="http://www.mathworks.com/support/tech-notes/1600/1605.html">this
-MathWorks support document</a>.</p>
+3. **Configure MATLAB.** Next, you need to set up and configure MATLAB
+to build MEX Files. This is explained quite nicely in
+[this MathWorks support document](http://www.mathworks.com/support/tech-notes/1600/1605.html).
 
-<p><b>Simple compilation procedure.</b> (Thanks to Stefan Harmeling.) You
-  might be able to build and compile the MEX File from source code simply by
-  calling MATLAB's mex program with the C++ and Fortran source files as 
-  inputs like so:</p>
+4. **Simple compilation procedure.** (Thanks to Stefan Harmeling.) You
+might be able to build and compile the MEX File from source code
+simply by calling MATLAB's mex program with the C++ and Fortran source
+files as inputs like so:
 
-<p><code><pre>  mex -output lbfgsb *.cpp solver.f</pre></code></p>
+`mex -output lbfgsb *.cpp solver.f`
 
-<p>If that doesn't work (you get linking errors or it makes MATLAB crash 
-  when you try to call it) then you may have to follow the complicated 
-  installation instructions below.</p>
+If that doesn't work (e.g. you get linking errors or it makes MATLAB
+crash when you try to call it) then you may have to follow the more
+complicated installation instructions below.
 
-<p><b>Modify the Makefile.</b> You are almost ready to build the MEX
+5. **Modify the Makefile.** You are almost ready to build the MEX
 file. But before you do so, you need to edit the Makefile to coincide
 with your system setup. At the top of the file are several variables
-you may need to modify. The variable <code>MEX</code> is the
-executable called to build the MEX file. The variables
-<code>CXX</code> and <code>F77</code> must be the names of your C++
-and Fortran 77 compilers. <code>MEXSUFFIX</code> is the MEX file
-extension specific to your platform. (For instance, the extension for
-Linux is <code>mexglx</code>.) The variable <code>MATLAB_HOME</code>
-must be the base directory of your MATLAB installation. Finally,
-<code>CFLAGS</code> and <code>FFLAGS</code> are options passed to the
-C++ and Fortran compilers, respectively. Often these flags coincide
-with your MEX options file (see <a
-href="http://www.mathworks.com/support/tech-notes/1600/1605.html">here</a>
-for more information on the options file). But often the settings in
-the MEX option file are incorrect, and so the options must be set
+you may need to modify. The variable **MEX** is the executable called
+to build the MEX file. The variables **CXX** and **F77** must be the
+names of your C++ and Fortran 77 compilers. **MEXSUFFIX** is the MEX
+file extension specific to your platform. (For instance, the extension
+for Linux is **mexglx**.) The variable **MATLAB_HOME** must be the
+base directory of your MATLAB installation. Finally, **CFLAGS** and
+**FFLAGS** are options passed to the C++ and Fortran compilers,
+respectively. Often these flags coincide with your MEX options file
+(see
+[here](http://www.mathworks.com/support/tech-notes/1600/1605.html) for
+more information on the options file). But often the settings in the
+MEX option file are incorrect, and so the options must be set
 manually. MATLAB requires some special compilation flags for various
 reasons, one being that it requires position-independent code. These
 instructions are vague (I apologize), and this step may require a bit
-of trial and error until before you get it right.</p>
+of trial and error until before you get it right.
 
-<p>On my laptop running Mac OS X 10.3.9 with MATLAB 7.2, my settings
-for the Makefile are</p>
+On my laptop running Mac OS X 10.3.9 with MATLAB 7.2, my settings
+for the Makefile are
 
-<p><code><pre>  MEX         = mex
-  MEXSUFFIX   = mexmac
-  MATLAB_HOME = /Applications/MATLAB72
-  CXX         = g++
-  F77         = g77 
-  CFLAGS      = -O3 -fPIC -fno-common -fexceptions \
-                -no-cpp-precomp 
-  FFLAGS      = -O3 -x f77-cpp-input -fPIC -fno-common</pre></code></p>
+`MEX         = mex
+ MEXSUFFIX   = mexmac
+ MATLAB_HOME = /Applications/MATLAB72
+ CXX         = g++
+ F77         = g77 
+ CFLAGS      = -O3 -fPIC -fno-common -fexceptions \
+               -no-cpp-precomp 
+ FFLAGS      = -O3 -x f77-cpp-input -fPIC -fno-common`
 
-<p>On my Linux machine, I set the variables in the Makefile like so:</p> 
+On my Linux machine, I set the variables in the Makefile like so:
 
-<p><code><pre>  MEX         = mex
-  MEXSUFFIX   = mexglx
-  MATLAB_HOME = /cs/local/generic/lib/pkg/matlab-7.2
-  CXX         = g++-3.4.5
-  F77         = g77-3.4.5
-  CFLAGS      = -O3 -fPIC -pthread 
-  FFLAGS      = -O3 -fPIC -fexceptions</pre></code></p>
+`MEX         = mex
+ MEXSUFFIX   = mexglx
+ MATLAB_HOME = /cs/local/generic/lib/pkg/matlab-7.2
+ CXX         = g++-3.4.5
+ F77         = g77-3.4.5
+ CFLAGS      = -O3 -fPIC -pthread 
+ FFLAGS      = -O3 -fPIC -fexceptions`
 
-<p>It may be helpful to look at the GCC documentation in order to
-understand what these various compiler flags mean.</p>
+It may be helpful to look at the GCC documentation in order to
+understand what these various compiler flags mean.
 
-<p><b>Build the MEX file.</b> If you are in the directory containing all 
-the source files, typing 
-<code>make</code> in the command prompt will first compile the Fortran
-and C++ source files into object code (.o files). After that, the make
-program calls the MEX script, which in turn links all the object files
-together into a single MEX file. If you didn't get any errors, then
-you are ready to try out the bound-constrained solver in MATLAB. Note
-that even if you didn't get any errors, there's still a possibility
-that you didn't link the MEX file properly, in which case executing
-the MEX file will cause MATLAB to crash. But there's only one way to
-find out: the hard way.</p>
+6. **Build the MEX file.** If you are in the directory containing all
+the source files, typing **make** in the command prompt will first
+compile the Fortran and C++ source files into object code (.o
+files). After that, the make program calls the MEX script, which in
+turn links all the object files together into a single MEX file. If
+you didn't get any errors, then you are ready to try out the
+bound-constrained solver in MATLAB. Note that even if you didn't get
+any errors, there's still a possibility that you didn't link the MEX
+file properly, in which case executing the MEX file will cause MATLAB
+to crash. But there's only one way to find out: the hard way.
 
 ###Credits
 
