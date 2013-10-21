@@ -48,8 +48,8 @@ system, such as Mac OS X or Linux. (If you have a Windows operating
 system, Guillaume Jacquenot has generously provided
 [instructions](Compile_LBFGSB_on_Windows.txt) for compiling the
 software on Windows with [gnumex](http://gnumex.sourceforge.net) and
-Mingw. These instructions also assume you have GNU
-[make](http://www.gnu.org/software/make) installed.
+Mingw. These instructions also assume you have
+[GNU Make](http://www.gnu.org/software/make) installed.
 
 We will create a MEX file, which is basically a file that contains a
 routine that can be called from MATLAB as if it were a built-it
@@ -91,12 +91,12 @@ to build MEX Files. This is explained quite nicely in
 **Simple compilation procedure.** (Thanks to Stefan Harmeling.) You
 might be able to build and compile the MEX File from source code
 simply by calling MATLAB's mex program with the C++ and Fortran source
-files as inputs like so:
+files as inputs, like so:
 
     mex -output lbfgsb *.cpp solver.f
 
-If that doesn't work (e.g. you get linking errors or it makes MATLAB
-crash when you try to call it) then you may have to follow the more
+If that doesn't work (e.g. you get linking errors, or it makes MATLAB
+crash when you try to call it), then you may have to follow the more
 complicated installation instructions below.
 
 **Modify the Makefile.** You are almost ready to build the MEX
@@ -145,7 +145,7 @@ It may be helpful to look at the GCC documentation in order to
 understand what these various compiler flags mean.
 
 **Build the MEX file.** If you are in the directory containing all
-the source files, typing **make** in the command prompt will first
+the source files, typing **make** at the command prompt will first
 compile the Fortran and C++ source files into object code (.o
 files). After that, the make program calls the MEX script, which in
 turn links all the object files together into a single MEX file. If
@@ -158,10 +158,10 @@ to crash. But there's only one way to find out: the hard way.
 ###A brief tutorial
 
 I've written a short script [examplehs038.m](src/examplehs038.m) which
-demonstrates how to call **lbfgsb** for solving a small optimization
-problem, the Hock & Schittkowski test problem #38 **(Note #3)**. The
-optimization problem has four variables. They are bounded from below
-by -10 and bounded from above by +10. We've set the starting point to
+demonstrates how to call **lbfgsb** for solving a very small
+optimization problem, the Hock & Schittkowski test problem #38 **(Note
+#3)**. The optimization problem has 4 variables. They are bounded from
+below by -10 and from above by +10. We've set the starting point to
 (-3, -1, -3, -1). We've written two MATLAB functions for computing the
 objective function and the gradient of the objective function at a
 given point. These functions can be found in the files
@@ -186,7 +186,7 @@ representing the objective evaluated at the current point. The second
 function must compute the gradient of the objective at the current
 point. The input is the same as **objfunc**, but it must return as
 many outputs as there are inputs. For a complete guide on using the
-MATLAB interface, type **help lbfgsb** in the MATLAB prompt.
+MATLAB interface, type **help lbfgsb** in MATLAB.
 
 The script [exampleldaimages.m](src/exampleldaimages.m) is a more
 complicated example. It uses the L-BFGS-B solver to compute some
@@ -198,7 +198,7 @@ not possible to compute the posterior exactly. In this case, the
 optimization problem corresponds to minimizing the distance between
 the true posterior distribution and an approximate distribution. For
 more information, see the paper of Blei, Ng and Jordan, 2003 **(Note
-#4)**. In order to run this example, you will need to install the
+ #4)**. In order to run this example, you will need to install the
 [lightspeed](http://research.microsoft.com/~minka/software/lightspeed)
 for MATLAB developed by Tom Minka at Microsoft Research.
 
