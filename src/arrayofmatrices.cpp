@@ -1,5 +1,12 @@
+#ifdef OCTAVE
+  #include "mex.h"
+#else
+  #include "matrix.h"
+#endif
+
 #include "arrayofmatrices.h"
-#include "matrix.h"
+
+
 
 // Function definitions for class ArrayOfMatrices.
 // -----------------------------------------------------------------
