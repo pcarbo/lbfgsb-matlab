@@ -3,7 +3,7 @@
 This file gives you instructions about how to compile and install lbfgsb-matlab in Octave under Ubuntu Linux. For other Octave installations, this can still be used as a guide-line. For general information, license and usage instructions, read the README.md
 
 **Versions used in this manual:**
-lbfgsb-matlab has been compiled with gcc version 4.6.3 under Ubuntu 12.10, and tested with Octave 3.6.2 and 3.6.4.
+lbfgsb-matlab has been compiled with gcc version 4.6.3 under Ubuntu 12.10, and tested with Octave 3.6.2, 3.6.4 and 3.8.0
 
 
 ###Install Octave and required tools
