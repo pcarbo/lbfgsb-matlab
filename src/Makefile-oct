@@ -1,15 +1,25 @@
-OCTAVE_INCLUDE = /opt/octave/octave/include/octave-3.8.0/octave/
+OCTAVE_INCLUDE = /usr/include/octave-3.6.2/octave/
 MEX            = mkoctfile
 INSTALL_DIR	= lib
 
 CXX            = g++
 F77            = gfortran
 CFLAGS         = -O3 -fPIC -pthread -Wall -Werror -ansi -ffast-math -fomit-frame-pointer -fPIC
+#FFLAGS         = -O3 -fPIC -Wall -fexceptions -fcheck=bounds -g -Wno-uninitialized 
 FFLAGS         = -O3 -fPIC -fexceptions -Wall -g -Wno-uninitialized 
 
-#Choose the version of LBFGSB that you prefer
+# Uncomment the following 2 lines for using v 2.1
 #LBFGSB_OBJS = solver.o
-LBFGSB_OBJS = solver_3_0.o linpack.o timer.o blas.o 
+#LIBS =
+
+# Uncomment the following 2 lines for using V 3.0 with the blas libs provided with Lbfgsb.3.0
+#LBFGSB_OBJS = solver_3_0.o linpack.o timer.o blas.o
+#LIBS = 
+
+# Uncomment the following 2 lines for using V 3.0 with your own blas installation
+LBFGSB_OBJS = solver_3_0.o linpack.o timer.o
+LIBS = -lblas
+
 
 ###########################
 # Do not edit from here on!
@@ -31,7 +41,7 @@ all: $(TARGET)
 	$(F77) $(FFLAGS) -o $@ -c $^
 
 $(TARGET): $(OBJS)
-	$(MEX) --mex -o $@ $^
+	$(MEX) --mex -o $@ $^ $(LIBS)$
 
 install: create-install-dir
 	cp $(TARGET) ../$(INSTALL_DIR)
