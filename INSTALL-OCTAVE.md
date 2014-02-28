@@ -26,7 +26,7 @@ files.
 
 ###Download lbfgsb-matlab source code
 Clone or fork this repository, or download this repository as a
-[ZIP file](http://github.com/pcarbo/lbfgsb-matlab/archive/master.zip)
+[ZIP file](https://github.com/josombio/lbfgsb-matlab/archive/master.zip)
 and unpack the ZIP file to a folder of your choice. I use ~/octave/lbfgsb-matlab/. Recall that ~/octave is the directory where Octave puts user installed forge packages when using the pkg command. I personally use it also to place source from any external projects that I use. But you choose whatever directory you want. In the following we will refere to this directory as LBFGSB_HOME. 
 Wherever you find LBFGSB_HOME, you should substitute it with your own directory.
 
