@@ -3,7 +3,7 @@
 This file gives you instructions about how to compile and install lbfgsb-matlab in Octave under Ubuntu Linux. For other Octave installations, this can still be used as a guide-line. For general information, license and usage instructions, read the README.md
 
 **Versions used in this manual:**
-lbfgsb-matlab has been compiled with gcc version 4.6.3 under Ubuntu 12.10, and tested with Octave 3.6.2 and 3.6.4.
+lbfgsb-matlab has been compiled with gcc version 4.6.3 under Ubuntu 12.10, and tested with Octave 3.6.2, 3.6.4 and 3.8.0
 
 
 ###Install Octave and required tools
@@ -26,7 +26,7 @@ files.
 
 ###Download lbfgsb-matlab source code
 Clone or fork this repository, or download this repository as a
-[ZIP file](http://github.com/pcarbo/lbfgsb-matlab/archive/master.zip)
+[ZIP file](https://github.com/josombio/lbfgsb-matlab/archive/master.zip)
 and unpack the ZIP file to a folder of your choice. I use ~/octave/lbfgsb-matlab/. Recall that ~/octave is the directory where Octave puts user installed forge packages when using the pkg command. I personally use it also to place source from any external projects that I use. But you choose whatever directory you want. In the following we will refere to this directory as LBFGSB_HOME. 
 Wherever you find LBFGSB_HOME, you should substitute it with your own directory.
 
