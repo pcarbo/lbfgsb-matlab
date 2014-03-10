@@ -35,19 +35,33 @@ Inside LBFGSB_HOME/src you will find two different Makefiles: Makefile and Makef
 
     OCTAVE_INCLUDE = /usr/include/octave-3.6.2/octave/
     MEX            = mkoctfile
-    INSTALL_DIR    = ../lib
-
+    INSTALL_DIR	= lib
+    
     CXX            = g++
     F77            = gfortran
     CFLAGS         = -O3 -fPIC -pthread -Wall -Werror -ansi -ffast-math -fomit-frame-pointer -fPIC
-    FFLAGS         = -O3 -fPIC -fexceptions
+    FFLAGS         = -O3 -fPIC -fexceptions -Wall -g -Wno-uninitialized 
+    
+    # Uncomment the following 2 lines for using v 2.1
+    #LBFGSB_OBJS = solver.o
+    #LIBS =
+    
+    # Uncomment the following 2 lines for using V 3.0 with the blas libs provided with Lbfgsb.3.0
+    #LBFGSB_OBJS = solver_3_0.o linpack.o timer.o blas.o
+    #LIBS = 
+    
+    # Uncomment the following 2 lines for using V 3.0 with your own blas installation
+    LBFGSB_OBJS = solver_3_0.o linpack.o timer.o
+    LIBS = -lblas
 
 The variable **OCTAVE_INCLUDE** is the directory where the Octave header files required for development are installed. Make sure that it points to the right directory corresponding to the Octave version that you have installed. In this case it points to the version that we installed using apt-get.  
 **MEX** is the command to call the mkoctfile compiler. If mkoctfile is in the path, simply leave it as it is. If not, include in the variable the full path to it. If you have several versions of Octave installed, make sure that MEX points to the mkoctfile of the installation that you will compile and use lbfgsb-matlab with.  
 **INSTALL_DIR** is the installation directory relative to the LBFGSB_HOME directory (see Installation below).  
 **CXX** is the C++ compiler. In our case it is g++, which is in our your path.  
 **F77** is the fortran compiler. We chose and installed gfortran, which is in our path.  
-**CFLAGS** and **FFLAGS** are the flags passed to g++ and gfortran respectively when compiling the sources. Check the gcc and gfortran documentation to understand (and perhaps change) the flags.  
+**CFLAGS** and **FFLAGS** are the flags passed to g++ and gfortran respectively when compiling the sources. Check the gcc and gfortran documentation to understand (and perhaps change) the flags. 
+
+The version of l-bfgs-b to be used (and the blas libraries) can be chosen by uncommenting one of the three provided options.
 
 ###Build the MEX file
 Call make from the LBFGSB_HOME/src directory making sure that you use the specific Makefile for Octave. To do so use the -f option of make followed by the Octave compilation specific makefile
