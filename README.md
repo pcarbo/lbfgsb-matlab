@@ -1,6 +1,6 @@
-This is a fork of Peter Carbonetos's [lbfgsb-matlab](https://github.com/pcarbo/lbfgsb-matlab interface) (which will eventually be merged back) that provides compatibility with Octave. Additionally it adds support for the version 3.0 of L-BFGS-B (for Octave only).
+This is a temporary fork of Peter Carbonetos's [lbfgsb-matlab](https://github.com/pcarbo/lbfgsb-matlab interface) (which will eventually be merged back) that provides compatibility with Octave. Additionally it adds support for the version 3.0 of L-BFGS-B (for Octave only).
 
-The following is the original README with installation instructions for Matlab users. Octave specific installation instructions can be found in INSTALL-OCTAVE.md
+The following is the original README with installation instructions for Matlab users and a brief tutorial. Octave specific installation instructions can be found in INSTALL-OCTAVE.md
 
 ___
 
