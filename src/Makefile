@@ -17,7 +17,7 @@ CFLAGS      = -O3 -fPIC -fno-common -fexceptions -no-cpp-precomp
 FFLAGS      = -O3 -x f77-cpp-input -fPIC -fno-common 
 
 TARGET = lbfgsb.$(MEXSUFFIX)
-OBJS   = solver.o matlabexception.o matlabscalar.o matlabstring.o   \
+OBJS   = solver_2_4.o matlabexception.o matlabscalar.o matlabstring.o   \
          matlabmatrix.o arrayofmatrices.o program.o matlabprogram.o \
          lbfgsb.o
 

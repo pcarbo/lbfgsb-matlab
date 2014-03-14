@@ -8,17 +8,17 @@ CFLAGS         = -O3 -fPIC -pthread -Wall -Werror -ansi -ffast-math -fomit-frame
 #FFLAGS         = -O3 -fPIC -Wall -fexceptions -fcheck=bounds -g -Wno-uninitialized 
 FFLAGS         = -O3 -fPIC -fexceptions -Wall -g -Wno-uninitialized 
 
-# Uncomment the following 2 lines for using v 2.1
-#LBFGSB_OBJS = solver.o
+# Uncomment the following 2 lines for LBFGSB 2.4
+#LBFGSB_OBJS = solver_2_4.o
 #LIBS =
 
-# Uncomment the following 2 lines for using V 3.0 with the blas libs provided with Lbfgsb.3.0
-#LBFGSB_OBJS = solver_3_0.o linpack.o timer.o blas.o
-#LIBS = 
+# Uncomment the following 2 lines for LFBGSB 3.0 with blas libs provided
+LBFGSB_OBJS = solver_3_0.o linpack.o timer.o blas.o
+LIBS =
 
-# Uncomment the following 2 lines for using V 3.0 with your own blas installation
-LBFGSB_OBJS = solver_3_0.o linpack.o timer.o
-LIBS = -lblas
+# Uncomment the following 2 lines for LFBGSB 3.0 own blas libs
+#LBFGSB_OBJS = solver_3_0.o linpack.o timer.o
+#LIBS = -lblas
 
 
 ###########################
