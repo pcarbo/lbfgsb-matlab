@@ -37,7 +37,7 @@ Open and fine-tune the self-explanatory Makefile located inside the LBFGSB_HOME/
 
 Regarding the compilation for Octave, the variable **OCTAVE_INCLUDE** is the directory where the Octave header files required for development are installed. Make sure that it points to the right directory corresponding to the Octave version that you have installed. In this case it points to the version that we installed using apt-get. **OCT** is the command to call the mkoctfile compiler. If mkoctfile is in the path, simply leave it as it is. If not, include in the variable the full path to it. If you have several versions of Octave installed, make sure that MEX points to the mkoctfile of the installation that you will compile and use lbfgsb-matlab with.
     
-**INSTALLDIR** is the installation directory relative to the LBFGSB_HOME/src directory. After the compilation, the mex file and all the m files (containing the documentation and the examples) will be placed in this directory. If this directory does not exist, it will be automatically created.
+**INSTALLDIR** is the installation directory relative to the LBFGSB_HOME/src directory (see Installation below). 
 
 ###Build the MEX file
 Call make from the LBFGSB_HOME/src directory using the appropriate target. Either
