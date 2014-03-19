@@ -1,40 +1,111 @@
-# Linux settings.
-MEX         = mex
-MEXSUFFIX   = mexglx
-MATLAB_HOME = /cs/local/generic/lib/pkg/matlab-7.3
-CXX         = g++-3.4.5
-F77         = g77-3.4.5
-CFLAGS      = -O3 -fPIC -pthread 
-FFLAGS      = -O3 -fPIC -fexceptions 
+# for 'make nomex' you need to provide the variables MEX_SUFFIX and MATLAB_LIB
+# for 'make mex'   you need to provide the variable  MEX and have mex set up
+# for 'make oct'   you need to provide the variable  OCT and OCTAVE_INCLUDE
 
-# Mac OS X settings.
-MEX         = mex
-MEXSUFFIX   = mexmac
-MATLAB_HOME = /Applications/MATLAB72
-CXX         = g++
-F77         = g77 
-CFLAGS      = -O3 -fPIC -fno-common -fexceptions -no-cpp-precomp 
-FFLAGS      = -O3 -x f77-cpp-input -fPIC -fno-common 
+### 1) Choose Matlab configuration ############################################
+### path to your Matlab installation
+### you can find it by the commands 'locate matlab' or 'find / -name "matlab"'
+MATLAB_HOME=/usr/local/share/matlabR2008b
+### For 32 bit Linux, uncomment the following three lines. --------------------
+MEX        = $(MATLAB_HOME)/bin/mex
+MEX_SUFFIX = mexglx
+MATLAB_LIB = -L$(MATLAB_HOME)/bin/glnx86 -lmex
+### For 64 bit Linux, uncomment the following three lines. --------------------
+#MEX        = $(MATLAB_HOME)/bin/mex
+#MEX_SUFFIX = mexa64
+#MATLAB_LIB = -L$(MATLAB_HOME)/bin/glnxa64 -lmex
+### For Mac OS X, uncomment the following three lines. ------------------------
+#MEX        = /Applications/MATLAB7/bin/mex
+#MEX_SUFFIX = mexmac
+#MATLAB_LIB = -L$(MATLAB_HOME)/bin/maci -lmex
 
-TARGET = lbfgsb.$(MEXSUFFIX)
-OBJS   = solver_2_4.o matlabexception.o matlabscalar.o matlabstring.o   \
-         matlabmatrix.o arrayofmatrices.o program.o matlabprogram.o \
-         lbfgsb.o
+### 2) Choose Octave configuration ############################################
+#OCTAVE_INCLUDE = /usr/local/include/octave-3.2.4/octave
+OCTAVE_INCLUDE = /opt/octave/octave-3.8.1/include/octave-3.8.1/octave/
+OCT            = mkoctfile
 
-CFLAGS += -Wall -ansi -DMATLAB_MEXFILE
+### 3) Choose L-BFGS-B configuration ##########################################
+### Uncomment the following 2 lines for LBFGSB 2.4. ---------------------------
+#LBFGSB_OBJS = solver_2_4.o
+#LIBS =
+### Uncomment the following 2 lines for LFBGSB 3.0 with blas libs provided. ---
+LBFGSB_OBJS = solver_3_0.o linpack.o timer.o blas.o
+LIBS =
+### Uncomment the following 2 lines for LFBGSB 3.0 own blas libs. -------------
+#LBFGSB_OBJS = solver_3_0.o linpack.o timer.o
+#LIBS = -lblas
 
-all: $(TARGET)
+### 4) Choose FORTRAN compiler ################################################
+FFLAGS = -O3 -fPIC -fexceptions -Wall -g -Wno-uninitialized
+### To work with f77, uncomment the following two lines. ----------------------
+#F77         = f77
+#FORTRAN_LIB = g2c
+### To use gfortran, uncomment the following two lines. -----------------------
+F77         = gfortran
+FORTRAN_LIB = gfortran
+
+### 5) Choose C++ compiler ####################################################
+CXX    = g++
+CFLAGS = -O3 -fPIC -pthread -Wall -Werror -ansi -ffast-math -fomit-frame-pointer
+
+### 6) If you need to specify extra directories where to look for libraries, 
+### write the paths of the directories, separated by a white space
+#LIBDIRS = /usr/lib/gcc/x86_64-linux-gnu/4.8/
+LIBDIRS = 
+
+### 7) Choose your installation directory relative to the src directory
+INSTALLDIR = ../lib
+
+###############################################################################
+### Do not edit below #########################################################
+###############################################################################
+
+TARGET  = lbfgsb
+OBJS    = $(LBFGSB_OBJS) matlabexception.o matlabscalar.o matlabstring.o \
+          matlabmatrix.o arrayofmatrices.o program.o matlabprogram.o \
+          lbfgsb.o
 
 %.o: %.cpp
-	$(CXX) $(CFLAGS) -I$(MATLAB_HOME)/extern/include -o $@ -c $^
+	$(CXX) $(CFLAGS) -I$(OCTAVE_INCLUDE) -I$(MATLAB_HOME)/extern/include -o $@ -c $^
 
 %.o: %.f
 	$(F77) $(FFLAGS) -o $@ -c $^
 
-$(TARGET): $(OBJS)
-	$(MEX) -cxx CXX=$(CXX) CC=$(CXX) FC=$(FCC) LD=$(CXX) -lg2c -lm \
+all: nomex
+
+
+mex:   $(TARGET)_mex     tidy
+
+nomex: $(TARGET)_nomex   tidy
+
+octave: $(TARGET)_octave tidy
+
+oct: octave
+
+$(TARGET)_mex: $(OBJS)
+	$(MEX) -cxx CXX=$(CXX) CC=$(CXX) FC=$(FCC) LD=$(CXX) -l$(FORTRAN_LIB) -lm \
         -O -output $@ $^
 
-clean:
-	rm -f *.o $(TARGET)
+$(TARGET)_nomex: $(OBJS)
+	$(CXX) $^ -shared -o $(TARGET).$(MEX_SUFFIX) $(MATLAB_LIB) $(addprefix -L,$(LIBDIRS)) -l$(FORTRAN_LIB) -lm
 
+$(TARGET)_octave: $(OBJS)
+	$(OCT) --mex -o $(TARGET).mex $^ $(LIBS)$
+
+create-install-dir:
+	@if [ ! -e $(INSTALLDIR) ]; then \
+	mkdir $(INSTALLDIR); \
+	fi
+	cp *.m $(INSTALLDIR)
+	
+install: create-install-dir
+	mv $(TARGET).mex* $(INSTALLDIR)
+
+tidy:
+	rm -f *.o
+
+clean: tidy
+	rm -f $(INSTALLDIR)/$(TARGET).mex*
+	
+deep-clean:
+	rm -f $(INSTALLDIR) -R

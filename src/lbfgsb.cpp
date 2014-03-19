@@ -1,5 +1,5 @@
 #include "mex.h"
-#ifndef OCTAVE
+#ifndef __linux__
   #include "matrix.h"
 #endif
 #include "arrayofmatrices.h"

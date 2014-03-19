@@ -1,4 +1,4 @@
-#ifdef OCTAVE
+#ifdef __linux__
   #include "mex.h"
 #else
   #include "matrix.h"

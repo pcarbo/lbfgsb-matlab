@@ -1,6 +1,4 @@
-#ifdef OCTAVE
-  #include <cstring>
-#endif
+#include <cstring>
 #include "matlabstring.h"
 #include "matlabexception.h"
 
