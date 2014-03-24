@@ -1,19 +1,13 @@
-This is a temporary fork of Peter Carbonetto's
-[lbfgsb-matlab](https://github.com/pcarbo/lbfgsb-matlab interface)
-(which will eventually be merged back) that provides compatibility
-with Octave. Additionally it adds support for the version 3.0 of
-[L-BFGS-B](http://www.ece.northwestern.edu/~nocedal/lbfgsb.html)
-
-The following is the original README with installation instructions
-and a brief tutorial. The makefile that it refers to has been renamed
-to Makefile.bak. Updated Linux specific installation instructions can
-be found in
-[INSTALL-LINUX.md](https://github.com/josombio/lbfgsb-matlab/blob/master/INSTALL-LINUX.md)
-___
-
 # A MATLAB interface for L-BFGS-B
 
-###Synopsis
+###Update
+
+As of March 24, 2014, the MATLAB code supports the latest version of
+the L-BFGS-B solver (version 3.0), and is
+[GNU Octave](https://www.gnu.org/software/octave) compatible. Thank
+you to Jose Vallet for these updates.
+
+###Overview
 
 L-BFGS-B is a collection of Fortran 77 routines for solving
 large-scale nonlinear optimization problems with bound constraints on
