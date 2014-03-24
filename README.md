@@ -1,6 +1,14 @@
-This is a temporary fork of Peter Carbonetto's [lbfgsb-matlab](https://github.com/pcarbo/lbfgsb-matlab interface) (which will eventually be merged back) that provides compatibility with Octave. Additionally it adds support for the version 3.0 of [L-BFGS-B](http://www.ece.northwestern.edu/~nocedal/lbfgsb.html)
+This is a temporary fork of Peter Carbonetto's
+[lbfgsb-matlab](https://github.com/pcarbo/lbfgsb-matlab interface)
+(which will eventually be merged back) that provides compatibility
+with Octave. Additionally it adds support for the version 3.0 of
+[L-BFGS-B](http://www.ece.northwestern.edu/~nocedal/lbfgsb.html)
 
-The following is the original README with installation instructions and a brief tutorial. The makefile that it refers to has been renamed to Makefile.bak. Updated Linux specific installation instructions can be found in [INSTALL-LINUX.md](https://github.com/josombio/lbfgsb-matlab/blob/master/INSTALL-LINUX.md)
+The following is the original README with installation instructions
+and a brief tutorial. The makefile that it refers to has been renamed
+to Makefile.bak. Updated Linux specific installation instructions can
+be found in
+[INSTALL-LINUX.md](https://github.com/josombio/lbfgsb-matlab/blob/master/INSTALL-LINUX.md)
 ___
 
 # A MATLAB interface for L-BFGS-B
@@ -13,27 +21,27 @@ the variables. One of the key features of the nonlinear solver is that
 knowledge of the Hessian is not required; the solver computes search
 directions by keeping track of a quadratic model of the objective
 function with a limited-memory BFGS (Broyden-Fletcher-Goldfarb-Shanno)
-approximation to the Hessian **(Note #1)**. The algorithm was
+approximation to the Hessian *(see Note #1)*. The algorithm was
 developed by Ciyou Zhu, Richard Byrd and Jorge Nocedal. For more
 information, go to the
 [original distribution site](http://www.ece.northwestern.edu/~nocedal/lbfgsb.html)
 for the L-BFGS-B software package.
 
 I've designed an interface to the L-BFGS-B solver so that it can be
-called like any other function in MATLAB **(Note #2)**. See the text
+called like any other function in MATLAB *(see Note #2)*. See the text
 below for more information on installing and calling this function in
 MATLAB. Along the way, I've also developed a C++ class that
 encapsulates all the "messy" details in executing the L-BFGS-B
 code. See below for instructions on how to incorporate this C++ class
 info your own code.
 
-I've tested this software in MATLAB on both the Mac OS X and Linux
-operating systems (it has also been used successfully on Windows; see
-below).
+This code has been tested in MATLAB and Octave on Mac OS X and Linux
+for [GPML](http://www.gaussianprocess.org/gpml/code). It has also been
+executed successfully in Windows; see below.
 
 ###License
 
-Copyright (c) 2013, Peter Carbonetto
+Copyright (c) 2013, 2014 Peter Carbonetto
 
 The lbfgsb-matlab project repository is free software: you can
 redistribute it and/or modify it under the terms of the
@@ -49,12 +57,13 @@ This program is distributed in the hope that it will be useful, but
 ###Installation
 
 These installation instructions assume you have a UNIX-based operating
-system, such as Mac OS X or Linux. (If you have a Windows operating
-system, Guillaume Jacquenot has generously provided
-[instructions](INSTALL.WINDOWS.txt) for compiling the
-software on Windows with [gnumex](http://gnumex.sourceforge.net) and
-Mingw. These instructions also assume you have
-[GNU Make](http://www.gnu.org/software/make) installed.
+system, such as Mac OS X or Linux. These instructions also assume you
+have [GNU Make](http://www.gnu.org/software/make) installed.
+
+**For Windows machines:** If you have a Windows operating system,
+Guillaume Jacquenot has generously provided
+[instructions](INSTALL.WINDOWS.txt) for compiling the software on
+Windows with [gnumex](http://gnumex.sourceforge.net) and Mingw.
 
 We will create a MEX file, which is basically a file that contains a
 routine that can be called from MATLAB as if it were a built-it
@@ -364,10 +373,19 @@ Some functions used by [exampleldaimages.m](src/exampleldaimages.m) and
 
 ###Credits
 
-Developed by<br>
+MATLAB interface Developed by<br>
 [Peter Carbonetto](http://www.cs.ubc.ca/spider/pcarbo)<br>
 Dept. of Human Genetics<br>
 University of Chicago
+
+Support for Octave contributed by<br>
+[Jose Vallet](http://autsys.aalto.fi/en/JoseVallet)<br>
+School of Electrical Engineering<br>
+Aalto University
+
+Thank you to Ciyou Zhu, Richard Byrd, Jorge Nocedal and Jose Luis for
+making their L-BFGS-B Fortran code available, and to Hannes Nickisch
+for ...
 
 ###Notes
 
