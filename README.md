@@ -131,10 +131,10 @@ files to compile MEX files:
 to build MEX Files. This is explained quite nicely in
 [this MathWorks support document](http://www.mathworks.com/support/tech-notes/1600/1605.html).
 
-**Simple compilation procedure.** (Thanks to Stefan Harmeling.) You
-might be able to build and compile the MEX File from source code
-simply by calling MATLAB's mex program with the C++ and Fortran source
-files as inputs, like so:
+**Simple compilation procedure for MATLAB.** (Thanks to Stefan
+Harmeling.) You might be able to build and compile the MEX File from
+source code simply by calling MATLAB's mex program with the C++ and
+Fortran source files as inputs, like so:
 
     mex -output lbfgsb *.cpp solver.f
 
@@ -144,8 +144,25 @@ complicated installation instructions below.
 
 **Modify the Makefile.** You are almost ready to build the MEX
 file. But before you do so, you need to edit the Makefile to coincide
-with your system setup. At the top of the file are several variables
-you may need to modify. The variable **MEX** is the executable called
+with your system setup. Edit the Makefile located inside the
+LBFGSB_HOME/src directory, following the instructions provided in this
+file. With this Makefile you may create:
+
+- A mex file for Matlab using the mex compiler (mex taget).
+- A mex file for Matlab using your C compiler (nomex target).
+- A mex file for Octave using mkoctfile (oct target).
+
+Regarding the compilation for Octave, the variable **OCTAVE_INCLUDE**
+is the directory where the Octave header files required for
+development are installed. Make sure that it points to the correct
+directory corresponding to your Octave installation. **OCT** is the
+command to call the mkoctfile compiler. If mkoctfile is in the path,
+simply leave it as it is. If not, include in the variable the full
+path to it. If you have several versions of Octave installed, make
+sure that OCT points to the mkoctfile program that corresponds to the
+Octave version you would like to use. 
+
+For MATLAB, the variable **MEX** is the executable called
 to build the MEX file. The variables **CXX** and **F77** must be the
 names of your C++ and Fortran 77 compilers. **MEXSUFFIX** is the MEX
 file extension specific to your platform. (For instance, the extension
@@ -162,41 +179,55 @@ reasons, one being that it requires position-independent code. These
 instructions are vague (I apologize), and this step may require a bit
 of trial and error until before you get it right.
 
-On my laptop running Mac OS X 10.3.9 with MATLAB 7.2, my settings
-for the Makefile are
-
-    MEX         = mex
-    MEXSUFFIX   = mexmac
-    MATLAB_HOME = /Applications/MATLAB72
-    CXX         = g++
-    F77         = g77 
-    CFLAGS      = -O3 -fPIC -fno-common -fexceptions \
-                  -no-cpp-precomp 
-    FFLAGS      = -O3 -x f77-cpp-input -fPIC -fno-common
-
-On my Linux machine, I set the variables in the Makefile like so:
-
-    MEX         = mex
-    MEXSUFFIX   = mexglx
-    MATLAB_HOME = /cs/local/generic/lib/pkg/matlab-7.2
-    CXX         = g++-3.4.5
-    F77         = g77-3.4.5
-    CFLAGS      = -O3 -fPIC -pthread 
-    FFLAGS      = -O3 -fPIC -fexceptions
+**INSTALLDIR** is the installation directory relative to the
+LBFGSB_HOME/src directory (see Installation below).
 
 It may be helpful to look at the GCC documentation in order to
 understand what these various compiler flags mean.
 
-**Build the MEX file.** If you are in the directory containing all
-the source files, typing **make** at the command prompt will first
+**Build the MEX file.** If you are in the directory containing all the
+source files, calling **make** at the command prompt will first
 compile the Fortran and C++ source files into object code (.o
 files). After that, the make program calls the MEX script, which in
-turn links all the object files together into a single MEX file. If
-you didn't get any errors, then you are ready to try out the
-bound-constrained solver in MATLAB. Note that even if you didn't get
-any errors, there's still a possibility that you didn't link the MEX
-file properly, in which case executing the MEX file will cause MATLAB
-to crash. But there's only one way to find out: the hard way.
+turn links all the object files together into a single MEX file. Call
+make from the LBFGSB_HOME/src directory using the appropriate target,
+one of:
+
+    make oct
+    make nomex 
+    make mex
+
+If you didn't get any errors, then you are ready to try out the
+bound-constrained solver in MATLAB or Octave. Note that even if you
+didn't get any errors, there's still a possibility that you didn't
+link the MEX file properly, in which case executing the MEX file will
+cause MATLAB to crash. But there's only one way to find out: the hard
+way.
+
+**Final installation steps.**
+
+Installing the mex file is as simple as placing it wherever MATLAB or
+Octave can find it, that is, in its path. There are many ways to do
+this. Whatever approach you take, note that the mex file does not
+contain the usage documentation, which is provided in lbfgsb.m. So
+wherever you place lbfgsb.mex, make sure that you include lbfgsb.m in
+the same directory.
+
+Perhaps the simplest approach to copy lbfgsb.mex and lbfgsb.m to a a
+specific folder. Alternatively, 
+
+    make install
+
+will create the .mex and .m files in the INSTALLDIR directory, and
+this directory will be automatically created if it does not
+exist. Adding the installation directory to the MATLAB or Octave path
+can be done using the command **addpath**.
+
+Note that once you exit MATLAB or Octave the updated path is not
+preserved, and you will need to use addpath in every new
+session. Alternatively, you can add the addpath command to ~/.octaverc
+or ~/matlab/startup. In this way, the path will automatically be
+updated every time you start a new session.
 
 ###A brief tutorial
 
