@@ -3,9 +3,9 @@
 ###Update
 
 As of March 24, 2014, the MATLAB code supports the latest version of
-the L-BFGS-B solver (version 3.0), and is
-[GNU Octave](https://www.gnu.org/software/octave) compatible. Thank
-you to Jose Vallet for these updates.
+the L-BFGS-B solver (version 3.0), and is compatible with
+[GNU Octave](https://www.gnu.org/software/octave). Thank you to
+[Jose Vallet](http://github.com/josombio) for providing these updates.
 
 ###Overview
 
@@ -29,9 +29,9 @@ encapsulates all the "messy" details in executing the L-BFGS-B
 code. See below for instructions on how to incorporate this C++ class
 info your own code.
 
-This code has been tested in MATLAB and Octave on Mac OS X and Linux
-for [GPML](http://www.gaussianprocess.org/gpml/code). It has also been
-executed successfully in Windows; see below.
+This code has been tested in MATLAB and Octave on Linux, and is
+integrated into [GPML](http://www.gaussianprocess.org/gpml/code). It
+has also been executed successfully in Windows; see below.
 
 ###License
 
@@ -50,14 +50,23 @@ This program is distributed in the hope that it will be useful, but
 
 ###Installation
 
-These installation instructions assume you have a UNIX-based operating
-system, such as Mac OS X or Linux. These instructions also assume you
-have [GNU Make](http://www.gnu.org/software/make) installed.
+Follow these steps to compile and install **lbfgsb-matlab** for MATLAB
+and Octave. Some of these steps are applicable to MATLAB or Octave
+only, and you can skip them if you want to install the interface for
+only one of them. These installation instructions assume you have
+Linux, although similar steps should also work for other UNIX-based
+operating systems, such as Mac OS X. These instructions also assume
+you have [GNU Make](http://www.gnu.org/software/make) installed. (We
+have successfully compiled this source code with gcc versions 4.6.3
+and 4.6.4, under Ubuntu Linux 12.10 and 13.10, and have successfully
+run the MATLAB scripts in Octave 3.6.2, 3.6.4, 3.8.0 and 3.8.1.)
 
-**For Windows machines:** If you have a Windows operating system,
+**For Windows users:** If you have a Windows operating system,
 Guillaume Jacquenot has generously provided
 [instructions](INSTALL.WINDOWS.txt) for compiling the software on
-Windows with [gnumex](http://gnumex.sourceforge.net) and Mingw.
+Windows with [gnumex](http://gnumex.sourceforge.net) and Mingw. These
+instructions are slightly out of date, and suggestions for improving
+these installation instructions are welcome.
 
 We will create a MEX file, which is basically a file that contains a
 routine that can be called from MATLAB as if it were a built-it
@@ -78,6 +87,10 @@ the
 [distribution site](http://www.ece.northwestern.edu/~nocedal/lbfgsb.html)
 at Northwestern University.
 
+In the following, we will refer to the directory containing your local
+copy of the repository as LBFGSB_HOME. Wherever you find LBFGSB_HOME,
+you should substitute it with your own directory.
+
 **Install the C++ and Fortran 77 compilers.** In order to build the
 MEX file, you will need both a C++ compiler and a Fortran 77
 compiler. Unfortunately, you can't just use any compiler. You have to
@@ -91,6 +104,28 @@ correct version of the compiler, otherwise you will encounter linking
 errors. Refer to
 [this document](http://www.mathworks.com/support/tech-notes/1600/1601.html)
 to find out which compiler is supported by your version of MATLAB.
+
+You may also be able to use the **apt-get** program to install
+gfortran, as in:
+
+    sudo apt-get install build-essential gfortran
+
+**Install Octave.** You will of course need a working installation of
+Matlab or Octave. In the case of Octave, if you don't have it the
+easiest way to install it is from the repositories using **apt-get**:
+
+    sudo apt-get install octave
+
+If you want to use a more recent version of Octave, you will have to
+[install Octave from the source code](http://www.gnu.org/software/octave/doc/interpreter/Installation.html).
+After that, find the path to the mkoctfile compiler (in the bin
+directory) and the include directory. You will need those paths for
+steps below.
+
+Additionally you will need all the necessary tools, libs and header
+files to compile MEX files:
+
+    sudo apt-get install liboctave-dev
 
 **Configure MATLAB.** Next, you need to set up and configure MATLAB
 to build MEX Files. This is explained quite nicely in
@@ -373,7 +408,7 @@ Dept. of Human Genetics<br>
 University of Chicago
 
 Support for Octave contributed by<br>
-[Jose Vallet](http://autsys.aalto.fi/en/JoseVallet)<br>
+[Jose Vallet](http://github.com/josombio)<br>
 School of Electrical Engineering<br>
 Aalto University
 
