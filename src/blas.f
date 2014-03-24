@@ -1,7 +1,7 @@
-c                                                                                      
-c  L-BFGS-B is released under the “New BSD License” (aka “Modified BSD License”        
-c  or “3-clause license”)                                                              
-c  Please read attached file License.txt                                               
+c                                                                        
+c  L-BFGS-B is released under the “New BSD License” (aka “Modified BSD 
+c  License” or “3-clause license”)                                          
+c  Please read attached file License.txt                                  
 c                                        
 
       double precision function dnrm2(n,x,incx)
