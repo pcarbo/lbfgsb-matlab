@@ -122,8 +122,8 @@ After that, find the path to the mkoctfile compiler (in the bin
 directory) and the include directory. You will need those paths for
 steps below.
 
-Additionally you will need all the necessary tools, libs and header
-files to compile MEX files:
+Additionally you will need the Octave development tools, libs and
+header files to compile MEX files:
 
     sudo apt-get install liboctave-dev
 
@@ -188,10 +188,10 @@ understand what these various compiler flags mean.
 **Build the MEX file.** If you are in the directory containing all the
 source files, calling **make** at the command prompt will first
 compile the Fortran and C++ source files into object code (.o
-files). After that, the make program calls the MEX script, which in
-turn links all the object files together into a single MEX file. Call
-make from the LBFGSB_HOME/src directory using the appropriate target,
-one of:
+files). After that, the make program calls the MEX script, which links
+all the object files together into a single MEX file. Call **make**
+from the LBFGSB_HOME/src directory using the appropriate target, one
+of:
 
     make oct
     make nomex 
@@ -204,14 +204,12 @@ link the MEX file properly, in which case executing the MEX file will
 cause MATLAB to crash. But there's only one way to find out: the hard
 way.
 
-**Final installation steps.**
-
-Installing the mex file is as simple as placing it wherever MATLAB or
-Octave can find it, that is, in its path. There are many ways to do
-this. Whatever approach you take, note that the mex file does not
-contain the usage documentation, which is provided in lbfgsb.m. So
-wherever you place lbfgsb.mex, make sure that you include lbfgsb.m in
-the same directory.
+**Final installation steps.** Installing the mex file is as simple as
+placing it wherever MATLAB or Octave can find it; that is, in its
+"path". There are many ways to do this. Whatever approach you take, note
+that the mex file does not contain the usage documentation, which is
+provided in lbfgsb.m. So wherever you place lbfgsb.mex, make sure that
+you include lbfgsb.m in the same directory.
 
 Perhaps the simplest approach to copy lbfgsb.mex and lbfgsb.m to a a
 specific folder. Alternatively, 
@@ -220,14 +218,15 @@ specific folder. Alternatively,
 
 will create the .mex and .m files in the INSTALLDIR directory, and
 this directory will be automatically created if it does not
-exist. Adding the installation directory to the MATLAB or Octave path
-can be done using the command **addpath**.
+exist.
 
+Once you are in MATLAB or Octave, add the installation directory to
+the MATLAB or Octave path can be done using the command **addpath**.
 Note that once you exit MATLAB or Octave the updated path is not
-preserved, and you will need to use addpath in every new
-session. Alternatively, you can add the addpath command to ~/.octaverc
-or ~/matlab/startup. In this way, the path will automatically be
-updated every time you start a new session.
+preserved, and you will need to use addpath in every new session.  You
+can add the addpath command to ~/.octaverc or ~/matlab/startup. In
+this way, the path will automatically be updated every time you start
+a new session.
 
 ###A brief tutorial
 
