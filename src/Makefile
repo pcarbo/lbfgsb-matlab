@@ -96,7 +96,7 @@ octave: $(TARGET)_octave tidy
 oct: octave
 
 $(TARGET)_mex: $(OBJS)
-	$(MEX) -cxx CXX=$(CXX) CC=$(CXX) FC=$(FCC) LD=$(CXX) 
+	$(MEX) -cxx CXX=$(CXX) CC=$(CXX) FC=$(FCC) LD=$(CXX) \
 	-l$(FORTRAN_LIB) -lm -O -output $@ $^
 
 $(TARGET)_nomex: $(OBJS)
