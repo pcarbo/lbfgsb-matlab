@@ -38,7 +38,7 @@ This code has been tested in MATLAB and Octave on Linux, and is
 integrated into [GPML](http://www.gaussianprocess.org/gpml/code). It
 has also been executed successfully in Windows; see below.
 
-###License
+### License
 
 Copyright (c) 2013, 2014 Peter Carbonetto
 
@@ -370,7 +370,7 @@ only remaining detail is calling the Program constructor. After that,
 it is just a matter of declaring a new object of type MyProgram then
 calling the function runSolver.
 
-###Overview of source files
+### Overview of source files
 
 <b>solver.f</b><br>
 Fortran 77 source for the L-BFGS-B solver
