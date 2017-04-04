@@ -1,6 +1,6 @@
 # A MATLAB interface for L-BFGS-B
 
-###Updates
+### Updates
 
 As of March 24, 2014, the MATLAB code supports the latest version of
 the L-BFGS-B solver (version 3.0), and is compatible with
@@ -12,7 +12,7 @@ installation instructions below, see
 [this alternate solution](http://github.com/pcarbo/lbfgsb-matlab/issues/2), 
 which may work better for your setup.  
 
-###Overview
+### Overview
 
 L-BFGS-B is a collection of Fortran 77 routines for solving
 large-scale nonlinear optimization problems with bound constraints on
@@ -53,7 +53,7 @@ This program is distributed in the hope that it will be useful, but
 **merchantability** or **fitness for a particular purpose**. See
 [LICENSE](LICENSE) for more details.
 
-###Installation
+### Installation
 
 Follow these steps to compile and install **lbfgsb-matlab** for MATLAB
 and Octave. Some of these steps are applicable to MATLAB or Octave
@@ -233,7 +233,7 @@ can add the addpath command to ~/.octaverc or ~/matlab/startup. In
 this way, the path will automatically be updated every time you start
 a new session.
 
-###A brief tutorial
+### A brief tutorial
 
 I've written a short script [examplehs038.m](src/examplehs038.m) which
 demonstrates how to call **lbfgsb** for solving a very small
@@ -343,7 +343,7 @@ limited-memory quasi-Newton approximations to the Hessian; the low
 storage requirements can come at the cost of slow convergence to the
 solution.
 
-###The C++ interface
+### The C++ interface
 
 One of the nice byproducts of writing a MATLAB interface for
 L-BFGS-B is that I've ended up with a neat little C++ class that
@@ -435,7 +435,7 @@ mfldainit.m<br></b>
 Some functions used by [exampleldaimages.m](src/exampleldaimages.m) and
 [mflda.m](src/mflda.m).
 
-###Credits
+### Credits
 
 MATLAB interface Developed by<br>
 [Peter Carbonetto](http://www.cs.ubc.ca/spider/pcarbo)<br>
@@ -451,7 +451,7 @@ Thank you to Ciyou Zhu, Richard Byrd, Jorge Nocedal and Jose Luis for
 making their L-BFGS-B Fortran code available, and to Hannes Nickisch
 for ...
 
-###Notes
+### Notes
 
 1. Ciyou Zhu, Richard H. Byrd, Peihuang Lu and Jorge Nocedal
 (1997). Algorithm 778: L-BFGS-B: Fortran subroutines for large-scale
