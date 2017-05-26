@@ -374,7 +374,7 @@ Developed by<br>
 Dept. of Human Genetics<br>
 University of Chicago
 
-###Notes
+### Notes
 
 1. Ciyou Zhu, Richard H. Byrd, Peihuang Lu and Jorge Nocedal
 (1997). Algorithm 778: L-BFGS-B: Fortran subroutines for large-scale
