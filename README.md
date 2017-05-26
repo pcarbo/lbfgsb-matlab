@@ -1,4 +1,4 @@
-This is a temporary fork of Peter Carbonetto's [lbfgsb-matlab](https://github.com/pcarbo/lbfgsb-matlab interface) that provides:
+This is a temporary fork of Peter Carbonetto's [lbfgsb-matlab](https://github.com/pcarbo/lbfgsb-matlab) interface that provides:
  * a) Compatibility with Octave. 
  * b) Support for the version 3.0 of [L-BFGS-B](http://www.ece.northwestern.edu/~nocedal/lbfgsb.html). 
  * c) Support for the iprint option of the L-BFGS-B
