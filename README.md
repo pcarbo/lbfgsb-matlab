@@ -1,4 +1,9 @@
-This is a temporary fork of Peter Carbonetto's [lbfgsb-matlab](https://github.com/pcarbo/lbfgsb-matlab interface) that provides compatibility with Octave. Additionally it adds support for the version 3.0 of [L-BFGS-B](http://www.ece.northwestern.edu/~nocedal/lbfgsb.html). This fork has been already merged.
+This is a temporary fork of Peter Carbonetto's [lbfgsb-matlab](https://github.com/pcarbo/lbfgsb-matlab interface) that provides:
+ * a) Compatibility with Octave. 
+ * b) Support for the version 3.0 of [L-BFGS-B](http://www.ece.northwestern.edu/~nocedal/lbfgsb.html). 
+ * c) Support for the iprint option of the L-BFGS-B
+
+Features a and b have been already incorporated into the original project. 
 
 The following is the original README with installation instructions and a brief tutorial. The makefile that it refers to has been renamed to Makefile.bak. Updated Linux specific installation instructions can be found in [INSTALL-LINUX.md](https://github.com/josombio/lbfgsb-matlab/blob/master/INSTALL-LINUX.md)
 ___
