@@ -26,8 +26,7 @@ MATLAB_LIB = -L$(MATLAB_HOME)/bin/glnxa64 -lmex
 # MATLAB_LIB = -L$(MATLAB_HOME)/bin/maci -lmex
 
 # CHOOSE OCTAVE CONFIGURATION
-#OCTAVE_INCLUDE = /usr/local/include/octave-3.2.4/octave
-OCTAVE_INCLUDE = /opt/octave/octave-4.2.0/include/octave-4.2.0/octave/
+OCTAVE_INCLUDE = /usr/local/include/octave-3.2.4/octave
 OCT = mkoctfile
 
 # CHOOSE L-BFGS-B CONFIGURATION
@@ -69,9 +68,9 @@ LIBDIRS =
 # Choose your installation directory relative to the src directory.
 INSTALLDIR = ../lib
 
-###############################################################################
-### Do not edit below #########################################################
-###############################################################################
+######################################################################
+### Do not edit below ################################################
+######################################################################
 
 TARGET  = lbfgsb
 OBJS    = $(LBFGSB_OBJS) matlabexception.o matlabscalar.o matlabstring.o \
@@ -79,8 +78,8 @@ OBJS    = $(LBFGSB_OBJS) matlabexception.o matlabscalar.o matlabstring.o \
 	lbfgsb.o
 
 %.o: %.cpp
-	$(CXX) $(CFLAGS) -I$(OCTAVE_INCLUDE) -I$(MATLAB_HOME)/extern/include \
-	-o $@ -c $^
+	$(CXX) $(CFLAGS) -I$(OCTAVE_INCLUDE) \
+	-I$(MATLAB_HOME)/extern/include -o $@ -c $^
 
 %.o: %.f
 	$(F77) $(FFLAGS) -o $@ -c $^

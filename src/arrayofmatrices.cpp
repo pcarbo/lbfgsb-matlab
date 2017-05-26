@@ -6,8 +6,6 @@
 
 #include "arrayofmatrices.h"
 
-
-
 // Function definitions for class ArrayOfMatrices.
 // -----------------------------------------------------------------
 ArrayOfMatrices::ArrayOfMatrices (const mxArray* ptr) 
