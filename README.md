@@ -453,7 +453,7 @@ Dept. of Human Genetics<br>
 University of Chicago
 
 Support for Octave contributed by<br>
-[Jose Vallet](http://github.com/josombio)<br>
+[José Vallet](http://github.com/josombio)<br>
 School of Electrical Engineering<br>
 Aalto University
 
