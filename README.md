@@ -15,7 +15,7 @@ ___
 As of March 24, 2014, the MATLAB code supports the latest version of
 the L-BFGS-B solver (version 3.0), and is compatible with
 [GNU Octave](https://www.gnu.org/software/octave). Thank you to
-[Jose Vallet](http://github.com/josombio) for providing these updates.
+[José Vallet](http://github.com/josombio) for providing these updates.
 
 If you are having difficulties building the MEX files following the 
 installation instructions below, see 
