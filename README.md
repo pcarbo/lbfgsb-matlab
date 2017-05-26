@@ -10,7 +10,7 @@ ___
 
 # A MATLAB interface for L-BFGS-B
 
-###Synopsis
+### Synopsis
 
 L-BFGS-B is a collection of Fortran 77 routines for solving
 large-scale nonlinear optimization problems with bound constraints on
@@ -36,7 +36,7 @@ I've tested this software in MATLAB on both the Mac OS X and Linux
 operating systems (it has also been used successfully on Windows; see
 below).
 
-###License
+### License
 
 Copyright (c) 2013, Peter Carbonetto
 
@@ -51,7 +51,7 @@ This program is distributed in the hope that it will be useful, but
 **merchantability** or **fitness for a particular purpose**. See
 [LICENSE](LICENSE) for more details.
 
-###Installation
+### Installation
 
 These installation instructions assume you have a UNIX-based operating
 system, such as Mac OS X or Linux. (If you have a Windows operating
@@ -302,7 +302,7 @@ only remaining detail is calling the Program constructor. After that,
 it is just a matter of declaring a new object of type MyProgram then
 calling the function runSolver.
 
-###Overview of source files
+### Overview of source files
 
 <b>solver.f</b><br>
 Fortran 77 source for the L-BFGS-B solver
@@ -367,7 +367,7 @@ mfldainit.m<br></b>
 Some functions used by [exampleldaimages.m](src/exampleldaimages.m) and
 [mflda.m](src/mflda.m).
 
-###Credits
+### Credits
 
 Developed by<br>
 [Peter Carbonetto](http://www.cs.ubc.ca/spider/pcarbo)<br>
