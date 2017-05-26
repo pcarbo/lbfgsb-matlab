@@ -5,12 +5,24 @@ This is a temporary fork of Peter Carbonetto's [lbfgsb-matlab](https://github.co
 
 Features a and b have been already incorporated into the original project. 
 
-The following is the original README with installation instructions and a brief tutorial. The makefile that it refers to has been renamed to Makefile.bak. Updated Linux specific installation instructions can be found in [INSTALL-LINUX.md](https://github.com/josombio/lbfgsb-matlab/blob/master/INSTALL-LINUX.md)
+The following is the original README with installation instructions and a brief tutorial. 
 ___
 
 # A MATLAB interface for L-BFGS-B
 
-### Synopsis
+### Updates
+
+As of March 24, 2014, the MATLAB code supports the latest version of
+the L-BFGS-B solver (version 3.0), and is compatible with
+[GNU Octave](https://www.gnu.org/software/octave). Thank you to
+[Jose Vallet](http://github.com/josombio) for providing these updates.
+
+If you are having difficulties building the MEX files following the 
+installation instructions below, see 
+[this alternate solution](http://github.com/pcarbo/lbfgsb-matlab/issues/2), 
+which may work better for your setup.  
+
+### Overview
 
 L-BFGS-B is a collection of Fortran 77 routines for solving
 large-scale nonlinear optimization problems with bound constraints on
@@ -18,27 +30,27 @@ the variables. One of the key features of the nonlinear solver is that
 knowledge of the Hessian is not required; the solver computes search
 directions by keeping track of a quadratic model of the objective
 function with a limited-memory BFGS (Broyden-Fletcher-Goldfarb-Shanno)
-approximation to the Hessian **(Note #1)**. The algorithm was
+approximation to the Hessian *(see Note #1)*. The algorithm was
 developed by Ciyou Zhu, Richard Byrd and Jorge Nocedal. For more
 information, go to the
 [original distribution site](http://www.ece.northwestern.edu/~nocedal/lbfgsb.html)
 for the L-BFGS-B software package.
 
 I've designed an interface to the L-BFGS-B solver so that it can be
-called like any other function in MATLAB **(Note #2)**. See the text
+called like any other function in MATLAB *(see Note #2)*. See the text
 below for more information on installing and calling this function in
 MATLAB. Along the way, I've also developed a C++ class that
 encapsulates all the "messy" details in executing the L-BFGS-B
 code. See below for instructions on how to incorporate this C++ class
 info your own code.
 
-I've tested this software in MATLAB on both the Mac OS X and Linux
-operating systems (it has also been used successfully on Windows; see
-below).
+This code has been tested in MATLAB and Octave on Linux, and is
+integrated into [GPML](http://www.gaussianprocess.org/gpml/code). It
+has also been executed successfully in Windows; see below.
 
 ### License
 
-Copyright (c) 2013, Peter Carbonetto
+Copyright (c) 2013, 2014 Peter Carbonetto
 
 The lbfgsb-matlab project repository is free software: you can
 redistribute it and/or modify it under the terms of the
@@ -53,13 +65,23 @@ This program is distributed in the hope that it will be useful, but
 
 ### Installation
 
-These installation instructions assume you have a UNIX-based operating
-system, such as Mac OS X or Linux. (If you have a Windows operating
-system, Guillaume Jacquenot has generously provided
-[instructions](INSTALL.WINDOWS.txt) for compiling the
-software on Windows with [gnumex](http://gnumex.sourceforge.net) and
-Mingw. These instructions also assume you have
-[GNU Make](http://www.gnu.org/software/make) installed.
+Follow these steps to compile and install **lbfgsb-matlab** for MATLAB
+and Octave. Some of these steps are applicable to MATLAB or Octave
+only, and you can skip them if you want to install the interface for
+only one of them. These installation instructions assume you have
+Linux, although similar steps should also work for other UNIX-based
+operating systems, such as Mac OS X. These instructions also assume
+you have [GNU Make](http://www.gnu.org/software/make) installed. (We
+have successfully compiled this source code with gcc versions 4.6 and
+5.4 under Ubuntu Linux 12.10, 13.10, 14.10, 15.10 and 16.10, and have 
+successfully run the MATLAB scripts in Octave 3.6, 3.8, 4.0 and 4.2).
+
+**For Windows users:** If you have a Windows operating system,
+Guillaume Jacquenot has generously provided
+[instructions](INSTALL.WINDOWS.txt) for compiling the software on
+Windows with [gnumex](http://gnumex.sourceforge.net) and Mingw. These
+instructions are slightly out of date, and suggestions for improving
+these installation instructions are welcome.
 
 We will create a MEX file, which is basically a file that contains a
 routine that can be called from MATLAB as if it were a built-it
@@ -80,6 +102,10 @@ the
 [distribution site](http://www.ece.northwestern.edu/~nocedal/lbfgsb.html)
 at Northwestern University.
 
+In the following, we will refer to the directory containing your local
+copy of the repository as LBFGSB_HOME. Wherever you find LBFGSB_HOME,
+you should substitute it with your own directory.
+
 **Install the C++ and Fortran 77 compilers.** In order to build the
 MEX file, you will need both a C++ compiler and a Fortran 77
 compiler. Unfortunately, you can't just use any compiler. You have to
@@ -94,14 +120,36 @@ errors. Refer to
 [this document](http://www.mathworks.com/support/tech-notes/1600/1601.html)
 to find out which compiler is supported by your version of MATLAB.
 
+You may also be able to use the **apt-get** program to install
+gfortran, as in:
+
+    sudo apt-get install build-essential gfortran
+
+**Install Octave.** You will of course need a working installation of
+Matlab or Octave. In the case of Octave, if you don't have it the
+easiest way to install it is from the repositories using **apt-get**:
+
+    sudo apt-get install octave
+
+If you want to use a more recent version of Octave, you will have to
+[install Octave from the source code](http://www.gnu.org/software/octave/doc/interpreter/Installation.html).
+After that, find the path to the mkoctfile compiler (in the bin
+directory) and the include directory. You will need those paths for
+steps below.
+
+Additionally you will need the Octave development tools, libs and
+header files to compile MEX files:
+
+    sudo apt-get install liboctave-dev
+
 **Configure MATLAB.** Next, you need to set up and configure MATLAB
 to build MEX Files. This is explained quite nicely in
 [this MathWorks support document](http://www.mathworks.com/support/tech-notes/1600/1605.html).
 
-**Simple compilation procedure.** (Thanks to Stefan Harmeling.) You
-might be able to build and compile the MEX File from source code
-simply by calling MATLAB's mex program with the C++ and Fortran source
-files as inputs, like so:
+**Simple compilation procedure for MATLAB.** (Thanks to Stefan
+Harmeling.) You might be able to build and compile the MEX File from
+source code simply by calling MATLAB's mex program with the C++ and
+Fortran source files as inputs, like so:
 
     mex -output lbfgsb *.cpp solver.f
 
@@ -111,8 +159,25 @@ complicated installation instructions below.
 
 **Modify the Makefile.** You are almost ready to build the MEX
 file. But before you do so, you need to edit the Makefile to coincide
-with your system setup. At the top of the file are several variables
-you may need to modify. The variable **MEX** is the executable called
+with your system setup. Edit the Makefile located inside the
+LBFGSB_HOME/src directory, following the instructions provided in this
+file. With this Makefile you may create:
+
+- A mex file for Matlab using the mex compiler (mex taget).
+- A mex file for Matlab using your C compiler (nomex target).
+- A mex file for Octave using mkoctfile (oct target).
+
+Regarding the compilation for Octave, the variable **OCTAVE_INCLUDE**
+is the directory where the Octave header files required for
+development are installed. Make sure that it points to the correct
+directory corresponding to your Octave installation. **OCT** is the
+command to call the mkoctfile compiler. If mkoctfile is in the path,
+simply leave it as it is. If not, include in the variable the full
+path to it. If you have several versions of Octave installed, make
+sure that OCT points to the mkoctfile program that corresponds to the
+Octave version you would like to use. 
+
+For MATLAB, the variable **MEX** is the executable called
 to build the MEX file. The variables **CXX** and **F77** must be the
 names of your C++ and Fortran 77 compilers. **MEXSUFFIX** is the MEX
 file extension specific to your platform. (For instance, the extension
@@ -129,43 +194,56 @@ reasons, one being that it requires position-independent code. These
 instructions are vague (I apologize), and this step may require a bit
 of trial and error until before you get it right.
 
-On my laptop running Mac OS X 10.3.9 with MATLAB 7.2, my settings
-for the Makefile are
-
-    MEX         = mex
-    MEXSUFFIX   = mexmac
-    MATLAB_HOME = /Applications/MATLAB72
-    CXX         = g++
-    F77         = g77 
-    CFLAGS      = -O3 -fPIC -fno-common -fexceptions \
-                  -no-cpp-precomp 
-    FFLAGS      = -O3 -x f77-cpp-input -fPIC -fno-common
-
-On my Linux machine, I set the variables in the Makefile like so:
-
-    MEX         = mex
-    MEXSUFFIX   = mexglx
-    MATLAB_HOME = /cs/local/generic/lib/pkg/matlab-7.2
-    CXX         = g++-3.4.5
-    F77         = g77-3.4.5
-    CFLAGS      = -O3 -fPIC -pthread 
-    FFLAGS      = -O3 -fPIC -fexceptions
+**INSTALLDIR** is the installation directory relative to the
+LBFGSB_HOME/src directory (see Installation below).
 
 It may be helpful to look at the GCC documentation in order to
 understand what these various compiler flags mean.
 
-**Build the MEX file.** If you are in the directory containing all
-the source files, typing **make** at the command prompt will first
+**Build the MEX file.** If you are in the directory containing all the
+source files, calling **make** at the command prompt will first
 compile the Fortran and C++ source files into object code (.o
-files). After that, the make program calls the MEX script, which in
-turn links all the object files together into a single MEX file. If
-you didn't get any errors, then you are ready to try out the
-bound-constrained solver in MATLAB. Note that even if you didn't get
-any errors, there's still a possibility that you didn't link the MEX
-file properly, in which case executing the MEX file will cause MATLAB
-to crash. But there's only one way to find out: the hard way.
+files). After that, the make program calls the MEX script, which links
+all the object files together into a single MEX file. Call **make**
+from the LBFGSB_HOME/src directory using the appropriate target, one
+of:
 
-###A brief tutorial
+    make oct
+    make nomex 
+    make mex
+
+If you didn't get any errors, then you are ready to try out the
+bound-constrained solver in MATLAB or Octave. Note that even if you
+didn't get any errors, there's still a possibility that you didn't
+link the MEX file properly, in which case executing the MEX file will
+cause MATLAB to crash. But there's only one way to find out: the hard
+way.
+
+**Final installation steps.** Installing the mex file is as simple as
+placing it wherever MATLAB or Octave can find it; that is, in its
+"path". There are many ways to do this. Whatever approach you take, note
+that the mex file does not contain the usage documentation, which is
+provided in lbfgsb.m. So wherever you place lbfgsb.mex, make sure that
+you include lbfgsb.m in the same directory.
+
+Perhaps the simplest approach to copy lbfgsb.mex and lbfgsb.m to a a
+specific folder. Alternatively, 
+
+    make install
+
+will create the .mex and .m files in the INSTALLDIR directory, and
+this directory will be automatically created if it does not
+exist.
+
+Once you are in MATLAB or Octave, add the installation directory to
+the MATLAB or Octave path can be done using the command **addpath**.
+Note that once you exit MATLAB or Octave the updated path is not
+preserved, and you will need to use addpath in every new session.  You
+can add the addpath command to ~/.octaverc or ~/matlab/startup. In
+this way, the path will automatically be updated every time you start
+a new session.
+
+### A brief tutorial
 
 I've written a short script [examplehs038.m](src/examplehs038.m) which
 demonstrates how to call **lbfgsb** for solving a very small
@@ -275,7 +353,7 @@ limited-memory quasi-Newton approximations to the Hessian; the low
 storage requirements can come at the cost of slow convergence to the
 solution.
 
-###The C++ interface
+### The C++ interface
 
 One of the nice byproducts of writing a MATLAB interface for
 L-BFGS-B is that I've ended up with a neat little C++ class that
@@ -369,10 +447,19 @@ Some functions used by [exampleldaimages.m](src/exampleldaimages.m) and
 
 ### Credits
 
-Developed by<br>
+MATLAB interface Developed by<br>
 [Peter Carbonetto](http://www.cs.ubc.ca/spider/pcarbo)<br>
 Dept. of Human Genetics<br>
 University of Chicago
+
+Support for Octave contributed by<br>
+[Jose Vallet](http://github.com/josombio)<br>
+School of Electrical Engineering<br>
+Aalto University
+
+Thank you to Ciyou Zhu, Richard Byrd, Jorge Nocedal and Jose Luis for
+making their L-BFGS-B Fortran code available, and to Hannes Nickisch
+for ...
 
 ### Notes
 
