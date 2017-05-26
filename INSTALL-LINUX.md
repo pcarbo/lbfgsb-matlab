@@ -31,7 +31,7 @@ Wherever you find LBFGSB_HOME, you should substitute it with your own directory.
 
 ### Modify the Makefile
 Open and fine-tune the self-explanatory Makefile located inside the LBFGSB_HOME/src directory according to your needs. With this Makefile you can create
-- a mex file for Mtlab using the mex compiler (mex taget)
+- a mex file for Matlab using the mex compiler (mex taget)
 - a mex file for Matlab using your C compiler (nomex target)
 - a mex file for Octave using mkoctfile (oct target)
 
