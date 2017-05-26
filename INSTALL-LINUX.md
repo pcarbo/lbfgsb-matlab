@@ -23,13 +23,13 @@ files.
     sudo apt-get install liboctave-dev
 
 
-###Download lbfgsb-matlab source code
+### Download lbfgsb-matlab source code
 Clone or fork this repository, or download this repository as a
 [ZIP file](https://github.com/josombio/lbfgsb-matlab/archive/master.zip)
 and unpack the ZIP file to a folder of your choice. In the following we will refere to this directory as LBFGSB_HOME. 
 Wherever you find LBFGSB_HOME, you should substitute it with your own directory.
 
-###Modify the Makefile
+### Modify the Makefile
 Open and fine-tune the self-explanatory Makefile located inside the LBFGSB_HOME/src directory according to your needs. With this Makefile you can create
 - a mex file for Mtlab using the mex compiler (mex taget)
 - a mex file for Matlab using your C compiler (nomex target)
@@ -46,7 +46,7 @@ Call make from the LBFGSB_HOME/src directory using the appropriate target. Eithe
     make nomex 
     make mex
 
-###Installation
+### Installation
 Installing the mex file is as simple as placing it wherever Octave/Matlab can find it, that is, in its path. That is all. There are many ways to do this. Whatever is your way, note that the mex file does not contain the usage documentation, which is written in lbfgsb.m. So wherever you place lbfgsb.mex, make sure that you place lbfgsb.m in the same directory.
 
 My choice of installation is to copy lbfgsb.mex and lbfgsb.m to a specific folder and then add it to Octave's path, so that lbfgsb can be called independently of the Octave's working directory that I am using. The command
