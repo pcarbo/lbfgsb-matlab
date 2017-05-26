@@ -52,7 +52,8 @@ public:
   // the inputs to the constructor.
   Program (int n, double* x, double* lb, double* ub, int* btype,
 	   int m = defaultm, int maxiter = defaultmaxiter,
-	   double factr = defaultfactr, double pgtol = defaultpgtol);
+	   double factr = defaultfactr, double pgtol = defaultpgtol,
+	   int iprint = defaultprintlevel);
 
   // This is the same constructor as above, except that the
   // appropriate amount of memory is dynamically allocated for the
@@ -60,7 +61,8 @@ public:
   // makes sure that the memory is properly deallocated, but not so
   // for the other constructor.
   Program (int n, int m = defaultm, int maxiter = defaultmaxiter,
-	   double factr = defaultfactr, double pgtol = defaultpgtol);
+	   double factr = defaultfactr, double pgtol = defaultpgtol,
+	   int iprint = defaultprintlevel);
 
   // The destructor.
   virtual ~Program();

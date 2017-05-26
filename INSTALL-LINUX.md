@@ -5,7 +5,7 @@ This file gives you instructions about how to compile and install lbfgsb-matlab 
 **Versions used in this manual:**
 lbfgsb-matlab has been compiled with gcc versions 4.6.3 and 4.6.4, under Ubuntu 12.10 and 13.10, and tested with Octave 3.6.2, 3.6.4, 3.8.0 and 3.8.1.
 
-###Install the required tools
+### Install the required tools
 You will need a C++ and Fortran compiler. We will use gcc and gfortran
 
     sudo apt-get install build-essential gfortran
@@ -39,7 +39,7 @@ Regarding the compilation for Octave, the variable **OCTAVE_INCLUDE** is the dir
     
 **INSTALLDIR** is the installation directory relative to the LBFGSB_HOME/src directory (see Installation below). 
 
-###Build the MEX file
+### Build the MEX file
 Call make from the LBFGSB_HOME/src directory using the appropriate target. Either
 
     make oct
@@ -63,7 +63,7 @@ However, once you exit Octave the updated path is not preserved, and you would n
 
 or edit manually your  ~/.octaverc. That is all. You can now run the examplehs038 to test your lbfgsb installation.
 
-###Cleaning
+### Cleaning
 Calling
 
     make clean
@@ -72,4 +72,4 @@ will delete the mex files from the installation directory, and
 
     make deep-clean
 
-will delete the whole installation directory. The intermediate binaries created during compilation are automatically deleted after compilation.
+will in addition delete the whole installation directory. The intermediate binaries created during compilation are automatically deleted after compilation.

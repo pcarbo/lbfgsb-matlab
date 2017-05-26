@@ -21,7 +21,7 @@ MATLAB_LIB = -L$(MATLAB_HOME)/bin/glnx86 -lmex
 
 ### 2) Choose Octave configuration ############################################
 #OCTAVE_INCLUDE = /usr/local/include/octave-3.2.4/octave
-OCTAVE_INCLUDE = /opt/octave/octave-3.8.1/include/octave-3.8.1/octave/
+OCTAVE_INCLUDE = /opt/octave/octave-4.2.0/include/octave-4.2.0/octave/
 OCT            = mkoctfile
 
 ### 3) Choose L-BFGS-B configuration ##########################################
@@ -46,7 +46,8 @@ FORTRAN_LIB = gfortran
 
 ### 5) Choose C++ compiler ####################################################
 CXX    = g++
-CFLAGS = -O3 -fPIC -pthread -Wall -Werror -ansi -ffast-math -fomit-frame-pointer
+CFLAGS = -O3 -fPIC -pthread -Wall -Werror -ansi -ffast-math \
+	 -fomit-frame-pointer -std=c++11
 
 ### 6) If you need to specify extra directories where to look for libraries, 
 ### write the paths of the directories, separated by a white space
@@ -62,16 +63,17 @@ INSTALLDIR = ../lib
 
 TARGET  = lbfgsb
 OBJS    = $(LBFGSB_OBJS) matlabexception.o matlabscalar.o matlabstring.o \
-          matlabmatrix.o arrayofmatrices.o program.o matlabprogram.o \
+	  matlabmatrix.o arrayofmatrices.o program.o matlabprogram.o \
           lbfgsb.o
 
 %.o: %.cpp
-	$(CXX) $(CFLAGS) -I$(OCTAVE_INCLUDE) -I$(MATLAB_HOME)/extern/include -o $@ -c $^
+	$(CXX) $(CFLAGS) -I$(OCTAVE_INCLUDE) -I$(MATLAB_HOME)/extern/include \
+	-o $@ -c $^
 
 %.o: %.f
 	$(F77) $(FFLAGS) -o $@ -c $^
 
-all: nomex
+all: oct
 
 
 mex:   $(TARGET)_mex     tidy
@@ -84,10 +86,11 @@ oct: octave
 
 $(TARGET)_mex: $(OBJS)
 	$(MEX) -cxx CXX=$(CXX) CC=$(CXX) FC=$(FCC) LD=$(CXX) -l$(FORTRAN_LIB) -lm \
-        -O -output $@ $^
+	-O -output $@ $^
 
 $(TARGET)_nomex: $(OBJS)
-	$(CXX) $^ -shared -o $(TARGET).$(MEX_SUFFIX) $(MATLAB_LIB) $(addprefix -L,$(LIBDIRS)) -l$(FORTRAN_LIB) -lm
+	$(CXX) $^ -shared -o $(TARGET).$(MEX_SUFFIX) $(MATLAB_LIB) \
+	$(addprefix -L,$(LIBDIRS)) -l$(FORTRAN_LIB) -lm
 
 $(TARGET)_octave: $(OBJS)
 	$(OCT) --mex -o $(TARGET).mex $^ $(LIBS)$
@@ -102,10 +105,10 @@ install: create-install-dir
 	mv $(TARGET).mex* $(INSTALLDIR)
 
 tidy:
-	rm -f *.o
+	rm -f *.o *.so
 
 clean: tidy
-	rm -f $(INSTALLDIR)/$(TARGET).mex*
-	
-deep-clean:
+	rm -f $(TARGET).mex* $(INSTALLDIR)/$(TARGET).mex*
+
+deep-clean: clean
 	rm -f $(INSTALLDIR) -R
