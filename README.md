@@ -1,3 +1,13 @@
+This is a temporary fork of Peter Carbonetto's [lbfgsb-matlab](https://github.com/pcarbo/lbfgsb-matlab) interface that provides:
+ * a) Compatibility with Octave. 
+ * b) Support for the version 3.0 of [L-BFGS-B](http://www.ece.northwestern.edu/~nocedal/lbfgsb.html). 
+ * c) Support for the iprint option of the L-BFGS-B
+
+Features a and b have been already incorporated into the original project. 
+
+The following is the original README with installation instructions and a brief tutorial. 
+___
+
 # A MATLAB interface for L-BFGS-B
 
 ### Updates
@@ -5,7 +15,7 @@
 As of March 24, 2014, the MATLAB code supports the latest version of
 the L-BFGS-B solver (version 3.0), and is compatible with
 [GNU Octave](https://www.gnu.org/software/octave). Thank you to
-[Jose Vallet](http://github.com/josombio) for providing these updates.
+[José Vallet](http://github.com/josombio) for providing these updates.
 
 If you are having difficulties building the MEX files following the 
 installation instructions below, see 
@@ -62,9 +72,9 @@ only one of them. These installation instructions assume you have
 Linux, although similar steps should also work for other UNIX-based
 operating systems, such as Mac OS X. These instructions also assume
 you have [GNU Make](http://www.gnu.org/software/make) installed. (We
-have successfully compiled this source code with gcc versions 4.6.3
-and 4.6.4, under Ubuntu Linux 12.10 and 13.10, and have successfully
-run the MATLAB scripts in Octave 3.6.2, 3.6.4, 3.8.0 and 3.8.1.)
+have successfully compiled this source code with gcc versions 4.6 and
+5.4 under Ubuntu Linux 12.10, 13.10, 14.10, 15.10 and 16.10, and have 
+successfully run the MATLAB scripts in Octave 3.6, 3.8, 4.0 and 4.2).
 
 **For Windows users:** If you have a Windows operating system,
 Guillaume Jacquenot has generously provided
@@ -443,7 +453,7 @@ Dept. of Human Genetics<br>
 University of Chicago
 
 Support for Octave contributed by<br>
-[Jose Vallet](http://github.com/josombio)<br>
+[José Vallet](http://github.com/josombio)<br>
 School of Electrical Engineering<br>
 Aalto University
 

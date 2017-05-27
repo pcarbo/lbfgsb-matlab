@@ -58,7 +58,7 @@ FORTRAN_LIB = gfortran
 # CONFIGURE C++ COMPILER.
 CXX    = g++
 CFLAGS = -O3 -fPIC -pthread -Wall -Werror -ansi -ffast-math \
-         -fomit-frame-pointer
+	 -fomit-frame-pointer -std=c++11
 
 # If you need to specify extra directories where to look for libraries, 
 # write the paths of the directories, separated by a white space.
@@ -116,10 +116,10 @@ install: create-install-dir
 	mv $(TARGET).mex* $(INSTALLDIR)
 
 tidy:
-	rm -f *.o
+	rm -f *.o *.so
 
 clean: tidy
-	rm -f $(INSTALLDIR)/$(TARGET).mex*
+	rm -f $(TARGET).mex* $(INSTALLDIR)/$(TARGET).mex*
 
-deep-clean:
+deep-clean: clean
 	rm -f $(INSTALLDIR) -R

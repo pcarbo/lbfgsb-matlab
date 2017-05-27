@@ -62,8 +62,9 @@ MatlabProgram::MatlabProgram (ArrayOfMatrices& variables,
 			      const MatlabString* gradFunc, 
 			      const MatlabString* iterFunc, 
 			      mxArray* auxData, int m, int maxiter, 
-			      double factr, double pgtol) 
-  : Program(variables.numelems(),0,0,0,0,m,maxiter,factr,pgtol),
+			      double factr, double pgtol,
+			      int iprint)
+  : Program(variables.numelems(),0,0,0,0,m,maxiter,factr,pgtol,iprint),
     variables(variables) {
   x     = new double[n];
   lb    = new double[n];

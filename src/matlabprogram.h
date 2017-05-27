@@ -23,7 +23,8 @@ public:
 		 const MatlabString* objFunc, const MatlabString* gradFunc, 
 		 const MatlabString* iterFunc, mxArray* auxData, 
 		 int m = defaultm, int maxiter = defaultmaxiter,
-		 double factr = defaultfactr, double pgtol = defaultpgtol);
+		 double factr = defaultfactr, double pgtol = defaultpgtol,
+		 int iprint = defaultprintlevel);
 
   // The destructor.
   virtual ~MatlabProgram();
